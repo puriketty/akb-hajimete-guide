@@ -17,7 +17,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-report">
 
   <header class="site-header">
     <div class="container">
@@ -33,6 +33,14 @@
     </div>
   </header>
 
+  <div class="page-hero">
+    <div class="container">
+      <span class="hero-emoji" aria-hidden="true">💬</span>
+      <p class="hero-title">みんなの声、聞かせてね</p>
+      <p class="hero-sub">行った人の感想を、集めています</p>
+    </div>
+  </div>
+
   <main class="container">
 
     <h1>ライブレポ・みんなの声</h1>
@@ -40,9 +48,11 @@
 
     <div class="notice">
       公演に行った人の感想を、集めて載せていくページです。公演は9月26日・27日で、感想は<strong>公演のあと</strong>に送ってください。<br>
-      ここに載るのは、行った人の<strong>個人の感想</strong>です。公式の情報ではありません。セットリストなどの確かな情報は、確認できたものだけを、<a href="#answer">答え合わせ</a>に足します。<br>
+      ここに載るのは、行った人の<strong>個人の感想</strong>です。公式の情報ではありません。セットリストなどの確かな情報は、確定したものだけを、<a href="live.html#setlist">ライブ情報のページ</a>に載せます。<br>
       <strong>ネタバレを含む感想があります。</strong>まだ見ていない人は、気をつけてください。
     </div>
+
+    <p><a class="share-button" href="https://x.com/intent/post?text=AKB48%20THREE%20CONCEPTS%20LIVE%E3%81%AB%E8%A1%8C%E3%81%A3%E3%81%9F%E4%BA%BA%E3%81%AE%E6%84%9F%E6%83%B3%E3%82%92%E9%9B%86%E3%82%81%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%7C%E3%83%A9%E3%82%A4%E3%83%96%E3%83%AC%E3%83%9D%E3%83%BB%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E5%A3%B0(%E9%9D%9E%E5%85%AC%E5%BC%8F)&amp;url=https%3A%2F%2Fakb-hajimete-guide.netlify.app%2Freport" target="_blank" rel="noopener">Xで、このページをシェアする</a></p>
 
     <nav class="toc" aria-label="目次">
       <p class="toc-title">目次</p>
@@ -51,12 +61,13 @@
         <li><a href="#post">感想を送る</a></li>
         <li><a href="#rules">掲載のルール</a></li>
         <li><a href="#x">Xで、みんなの声を見る</a></li>
-        <li><a href="#answer">セットリストの答え合わせ</a></li>
+        <li><a href="#answer">セットリストについて</a></li>
         <li><a href="#remove">掲載の削除・修正のお願い</a></li>
       </ol>
     </nav>
 
     <h2 id="voices">行った人の声</h2>
+    <div id="voices-filter" class="filter-chips" aria-label="AKB歴で絞り込む"></div>
     <div id="voices-list"></div>
 
     <h2 id="post">感想を送る</h2>
@@ -82,6 +93,18 @@
       </div>
 
       <div class="field">
+        <span class="label required">AKB歴(ファン歴)</span>
+        <div class="checks">
+          <label><input type="radio" name="history" value="今回が初めて" required> 今回が初めて</label>
+          <label><input type="radio" name="history" value="1年未満"> 1年未満</label>
+          <label><input type="radio" name="history" value="1〜3年"> 1〜3年</label>
+          <label><input type="radio" name="history" value="3〜10年"> 3〜10年</label>
+          <label><input type="radio" name="history" value="10年以上"> 10年以上</label>
+          <label><input type="checkbox" name="returned" value="yes"> 一度離れて、<strong>戻ってきた</strong>(出戻り)</label>
+        </div>
+        <span class="hint">感想に、「AKB歴」のラベルとして表示されます。年齢は、聞きません。</span>
+      </div>
+      <div class="field">
         <label class="label required" for="message">感想</label>
         <textarea id="message" name="message" rows="7" maxlength="600" required placeholder="よかった曲やシーン、初めて行った人へのアドバイス、意外だったこと、など"></textarea>
         <span class="hint">600文字までです。</span>
@@ -95,12 +118,12 @@
 
       <div class="field">
         <div class="checks">
-          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。ニックネームと感想を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます)</label>
+          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。ニックネーム・感想・AKB歴のラベルを、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます)</label>
         </div>
       </div>
 
       <button type="submit" class="submit-button">送信する</button>
-      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想の、ニックネームと感想だけです。</p>
+      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想の、ニックネーム・感想・AKB歴のラベルだけです。</p>
     </form>
 
     <h2 id="rules">掲載のルール</h2>
@@ -116,7 +139,7 @@
         </ul>
       </li>
       <li>運営者が読んで、<strong>載せるものを選びます。すべてが載るわけではありません。</strong>意味が変わらない範囲で、誤字を直したり、長い文章を短くしたりすることがあります。</li>
-      <li>載せるのは、<strong>ニックネームと感想だけ</strong>です。</li>
+      <li>載せるのは、<strong>ニックネーム、感想、AKB歴のラベル</strong>だけです。</li>
       <li>ネタバレを含む感想は、「ネタバレを含む」にチェックが入っていて、押すまで読めない形で載せます。</li>
     </ul>
 
@@ -138,8 +161,8 @@
       </ul>
     </div>
 
-    <h2 id="answer">セットリストの答え合わせ</h2>
-    <p class="pending">公演のあとに、実際の曲目が、公式や確かな報告でわかったら、ここに足します。<a href="live.html#prep">ライブ情報の予習ガイド</a>の曲と、見比べられるようにします。</p>
+    <h2 id="answer">セットリストについて</h2>
+    <p class="pending">実際のセットリストと歌唱メンバーが確定したら、<a href="live.html#setlist">ライブ情報のページ</a>に載せます。公演の前には、曲目は発表されていないので、予想は載せません。</p>
 
     <h2 id="remove">掲載の削除・修正のお願い</h2>
     <p>このページに載った感想を、消してほしい、直してほしいときは、次のフォームから、お知らせください。確認して、対応します。(送られた内容と、送信に使われた通信の情報は、運営者だけが見られます)</p>
