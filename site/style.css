@@ -728,3 +728,36 @@ button {
 }
 .mini { display: inline-block; margin-right: 6px; color: var(--gray); }
 .mini.picked { color: var(--pink-deep); font-weight: 700; }
+/* ===== みんなの声: 新しいラベル・絞り込みの行・書くときのヒント・文字数 ===== */
+[hidden] { display: none !important; }
+.filter-group { margin: 6px 0 10px; }
+.filter-title { margin: 0; font-size: 0.8rem; font-weight: 700; color: var(--gray); }
+.filter-group .filter-chips { margin: 4px 0 6px; }
+.filter-chips button.primary { border-color: var(--pink); font-weight: 700; }
+.badge.onsite { background: var(--pink); border-color: var(--pink); color: #fff; }
+.badge.stream { background: #eaf3ff; border-color: #b9d3f3; color: #1d4f91; }
+.badge.first { background: #fff3c4; border-color: #f0dca0; color: #7a5300; }
+#voices-list h4 { margin: 14px 0 4px; font-size: 0.95rem; color: var(--gray); }
+
+.write-hints {
+  margin: 0 0 8px;
+  padding: 8px 12px;
+  background: #fff;
+  border: 2px dashed var(--pink-soft);
+  border-radius: 12px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.write-hints p { margin: 0 0 2px; font-weight: 700; color: var(--pink-deep); }
+.write-hints ul { margin: 0; padding-left: 1.2em; }
+.write-hints li { margin: 1px 0; }
+.counter { text-align: right; }
+.counter.near-limit { color: var(--cherry); font-weight: 700; }
+
+/* スマホで、選択肢を押しやすくする */
+@media (max-width: 600px) {
+  .checks label { padding: 6px 0; }
+  .checks input { width: 1.25em; height: 1.25em; vertical-align: -0.2em; }
+  .filter-chips button { padding: 8px 14px; }
+  .submit-button { width: 100%; padding: 14px 32px; }
+}
