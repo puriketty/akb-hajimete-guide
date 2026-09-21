@@ -266,6 +266,13 @@ th { background: var(--pink-light); color: var(--pink-deep); }
   vertical-align: middle;
 }
 
+/* 「予想」のラベル(公式発表のラベルと色を変えて、区別する) */
+.ex-guess {
+  background: #fff8e6;
+  border-color: #f0dca0;
+  color: #8a6100;
+}
+
 /* ===== 一番下 ===== */
 .site-footer {
   margin-top: 56px;
