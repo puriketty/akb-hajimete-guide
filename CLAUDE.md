@@ -41,6 +41,7 @@ AKB48の劇場公演・握手会に初めて行く人向けの、非公式ファ
 - 行った人の感想を集めるページ。フォームは Netlify Forms(`data-netlify="true"`)。フォーム名は `voice`(感想)と `remove-request`(削除・修正のお願い)。送信の完了ページは `thanks.html`(noindex、sitemap に入れない)。
 - 送信されたデータは、CLI で読める: `netlify api listSiteSubmissions --data '{\"site_id\":\"d259c98c-bcac-4871-aa53-92eaa09a9fca\"}'`(PowerShell では、JSON の引用符を `\"` にする)。削除は `deleteSubmission`。
 - 載せる流れ: 送信を読む → **ユーザーに、載せてよいものを確認してもらう** → 承諾済み(agree)のものだけを、`site/data/voices.js` に、ニックネームと感想だけ足す → PR → ユーザーがマージ。**メール・IP・本名・SNSのアカウントは、絶対に載せない・チャットにも出しすぎない。**
+- **Netlify は、送信ごとに、IPアドレス・User-Agent・参照元も保存する(2026-09-21 に確認)。** そのため、ページ(`report.html` と `about.html`)には、その旨を書いてある。チャットやコミットに、IPを出さない。フォーム検出は、サイト設定 `processing_settings.ignore_html_forms` を `false` にして有効化済み(初期設定は `true` で、フォームが認識されなかった)。
 - 載せないもの(ルールはページにも書いてある): 悪口・中傷、個人が特定できる情報、撮影・録音をうかがわせる内容、チケットの売買、宣伝、転載。ネタバレは `spoiler: true`。
 - 削除・修正のお願い(`remove-request`)は、優先して対応する。
 - Xの投稿は、コピーしない。公式ハッシュタグ(#AKBサンコンコン / #AKBが好きish)の検索へのリンクだけを置く。
