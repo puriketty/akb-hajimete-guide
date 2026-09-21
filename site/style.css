@@ -273,6 +273,70 @@ th { background: var(--pink-light); color: var(--pink-deep); }
   color: #8a6100;
 }
 
+/* ===================================================
+   感想フォーム・みんなの声(report.html)用
+   =================================================== */
+.form-box {
+  margin: 16px 0;
+  padding: 16px;
+  background: var(--pink-light);
+  border-radius: var(--radius);
+}
+.field { margin: 16px 0; }
+.field .label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  color: var(--pink-deep);
+}
+.field .required::after {
+  content: "必須";
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--cherry);
+  color: #fff;
+  font-size: 0.7rem;
+  vertical-align: middle;
+}
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  border: 2px solid var(--pink-soft);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text);
+}
+textarea { resize: vertical; }
+.checks label { display: block; margin: 8px 0; cursor: pointer; }
+.checks input { margin-right: 6px; }
+.hint { display: block; margin-top: 4px; font-size: 0.8rem; color: var(--gray); }
+.hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.submit-button {
+  padding: 10px 32px;
+  border: none;
+  border-radius: 999px;
+  background: var(--pink);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 0 var(--pink-deep);
+}
+.submit-button:hover { background: var(--pink-deep); }
+
+.voice {
+  margin: 10px 0;
+  padding: 12px 14px;
+  background: #fff;
+  border: 2px solid var(--pink-soft);
+  border-radius: var(--radius);
+}
+.voice .who { margin: 0; font-weight: 700; color: var(--pink-deep); }
+.voice .body { margin: 4px 0 0; white-space: pre-wrap; }
+.voice details summary { cursor: pointer; color: var(--pink-deep); font-weight: 700; }
+
 /* ===== 一番下 ===== */
 .site-footer {
   margin-top: 56px;

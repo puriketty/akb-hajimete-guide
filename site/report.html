@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ライブレポ・みんなの声|AKB48 THREE CONCEPTS LIVE(2026年9月26・27日)に行った人の感想</title>
+  <meta name="description" content="AKB48 THREE CONCEPTS LIVE(2026年9月26日・27日)に行った人の感想を集めるページです。感想を送るフォーム、掲載のルール、Xの公式ハッシュタグで見る方法をまとめています。(非公式ファンサイト)">
+  <link rel="canonical" href="https://akb-hajimete-guide.netlify.app/report.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="初めてのAKB48ガイド">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="ライブレポ・みんなの声|THREE CONCEPTS LIVEに行った人の感想">
+  <meta property="og:description" content="THREE CONCEPTS LIVE(2026年9月26日・27日)に行った人の感想を集めるページです。あなたの感想も送れます。">
+  <meta property="og:url" content="https://akb-hajimete-guide.netlify.app/report.html">
+  <meta property="og:image" content="https://akb-hajimete-guide.netlify.app/ogp.png">
+  <meta property="og:image:alt" content="初めてのAKB48ガイド(非公式ファンサイト)">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-name" href="index.html">初めてのAKB48ガイド</a>
+      <nav class="site-nav">
+        <a href="live.html">ライブ</a>
+        <a href="apply.html">申し込み</a>
+        <a href="theater.html">劇場公演</a>
+        <a href="handshake.html">個別握手会</a>
+        <a href="national.html">全国握手会</a>
+        <a href="planner.html">部割プランナー</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <h1>ライブレポ・みんなの声</h1>
+    <p class="updated">AKB48 THREE CONCEPTS LIVE(2026年9月26日・27日)</p>
+
+    <div class="notice">
+      公演に行った人の感想を、集めて載せていくページです。公演は9月26日・27日で、感想は<strong>公演のあと</strong>に送ってください。<br>
+      ここに載るのは、行った人の<strong>個人の感想</strong>です。公式の情報ではありません。セットリストなどの確かな情報は、確認できたものだけを、<a href="#answer">答え合わせ</a>に足します。<br>
+      <strong>ネタバレを含む感想があります。</strong>まだ見ていない人は、気をつけてください。
+    </div>
+
+    <nav class="toc" aria-label="目次">
+      <p class="toc-title">目次</p>
+      <ol>
+        <li><a href="#voices">行った人の声</a></li>
+        <li><a href="#post">感想を送る</a></li>
+        <li><a href="#rules">掲載のルール</a></li>
+        <li><a href="#x">Xで、みんなの声を見る</a></li>
+        <li><a href="#answer">セットリストの答え合わせ</a></li>
+        <li><a href="#remove">掲載の削除・修正のお願い</a></li>
+      </ol>
+    </nav>
+
+    <h2 id="voices">行った人の声</h2>
+    <div id="voices-list"></div>
+
+    <h2 id="post">感想を送る</h2>
+    <p>行った公演の感想を、送ってください。初めて行った人の感想も、長く応援している人の感想も、歓迎です。<a href="#rules">掲載のルール</a>を、先に読んでください。</p>
+    <form class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="voice">
+      <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
+
+      <div class="field">
+        <span class="label">行った公演(あてはまるものすべて)</span>
+        <div class="checks">
+          <label><input type="checkbox" name="shows" value="9/26 12:30 新曲「好きish」コンサート"> 9月26日(土)12:30 新曲「好きish」コンサート</label>
+          <label><input type="checkbox" name="shows" value="9/26 18:30 全員「好きish」コンサート"> 9月26日(土)18:30 全員「好きish」コンサート</label>
+          <label><input type="checkbox" name="shows" value="9/27 16:00 推しが「好きish」コンサート"> 9月27日(日)16:00 推しが「好きish」コンサート</label>
+          <label><input type="checkbox" name="shows" value="配信(Hulu)で見た"> 配信(Hulu)で見た</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="nickname">ニックネーム(任意)</label>
+        <input type="text" id="nickname" name="nickname" maxlength="20" autocomplete="off" placeholder="例: 初めてのAKBファン">
+        <span class="hint">本名や、SNSのアカウント名は、書かないでください。空欄なら「匿名」で載ります。</span>
+      </div>
+
+      <div class="field">
+        <label class="label required" for="message">感想</label>
+        <textarea id="message" name="message" rows="7" maxlength="600" required placeholder="よかった曲やシーン、初めて行った人へのアドバイス、意外だったこと、など"></textarea>
+        <span class="hint">600文字までです。</span>
+      </div>
+
+      <div class="field">
+        <div class="checks">
+          <label><input type="checkbox" name="spoiler" value="yes"> 曲目や演出など、<strong>ネタバレを含む</strong></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="checks">
+          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。ニックネームと感想を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます)</label>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button">送信する</button>
+      <p class="hint">送られた内容は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。載せる前の感想や、送信の記録は、公開されません。</p>
+    </form>
+
+    <h2 id="rules">掲載のルール</h2>
+    <ul>
+      <li><strong>歓迎するもの:</strong> 公演への感想、好きになった曲やシーン、初めて行く人へのアドバイス、行ってみて意外だったこと。</li>
+      <li><strong>載せないもの:</strong>
+        <ul>
+          <li>メンバー、スタッフ、ほかのお客さんへの悪口や、中傷(批判でも、人を傷つける言い方は載せません)</li>
+          <li>個人が特定できる情報(本名、SNSのアカウント名、連絡先、メンバーの私生活に関わること)</li>
+          <li>撮影や録音が禁止されている場所での、撮影や録音をうかがわせる内容、映像や音声の共有</li>
+          <li>チケットの売買・譲渡・募集</li>
+          <li>宣伝や勧誘、ほかの人の文章の転載</li>
+        </ul>
+      </li>
+      <li>運営者が読んで、<strong>載せるものを選びます。すべてが載るわけではありません。</strong>意味が変わらない範囲で、誤字を直したり、長い文章を短くしたりすることがあります。</li>
+      <li>載せるのは、<strong>ニックネームと感想だけ</strong>です。</li>
+      <li>ネタバレを含む感想は、「ネタバレを含む」にチェックが入っていて、押すまで読めない形で載せます。</li>
+    </ul>
+
+    <h2 id="x">Xで、みんなの声を見る</h2>
+    <p>感想は、Xでも、たくさん投稿されます。ここでは、<strong>投稿をコピーして載せることはしません。</strong>公式の案内に出ている、次の2つのハッシュタグの、<strong>検索ページへのリンク</strong>を置いています。リンクを押すと、Xが開いて、そのタグの最新の投稿が見られます。</p>
+    <p><strong>#AKBサンコンコン</strong> と <strong>#AKBが好きish</strong></p>
+    <ul>
+      <li><a href="https://x.com/search?q=(%23AKB%E3%82%B5%E3%83%B3%E3%82%B3%E3%83%B3%E3%82%B3%E3%83%B3%20OR%20%23AKB%E3%81%8C%E5%A5%BD%E3%81%8Dish)&amp;src=typed_query&amp;f=live" target="_blank" rel="noopener">2つのタグの、最新の投稿を見る</a></li>
+      <li><a href="https://x.com/search?q=(%23AKB%E3%82%B5%E3%83%B3%E3%82%B3%E3%83%B3%E3%82%B3%E3%83%B3%20OR%20%23AKB%E3%81%8C%E5%A5%BD%E3%81%8Dish)%20since%3A2026-09-26%20until%3A2026-09-27&amp;src=typed_query&amp;f=live" target="_blank" rel="noopener">9月26日(土)の投稿を見る</a>(昼と夜の2公演)</li>
+      <li><a href="https://x.com/search?q=(%23AKB%E3%82%B5%E3%83%B3%E3%82%B3%E3%83%B3%E3%82%B3%E3%83%B3%20OR%20%23AKB%E3%81%8C%E5%A5%BD%E3%81%8Dish)%20since%3A2026-09-27%20until%3A2026-09-28&amp;src=typed_query&amp;f=live" target="_blank" rel="noopener">9月27日(日)の投稿を見る</a></li>
+    </ul>
+    <div class="notice">
+      <strong>見るときの注意</strong>
+      <ul>
+        <li><strong>ネタバレを含む投稿が、たくさんあります。</strong>まだ見ていない人は、気をつけてください。</li>
+        <li>Xにログインしていないと、検索が見られないことがあります。日付の指定が、うまく効かないこともあります。</li>
+        <li>投稿は、書いた人の個人の意見です。内容が正しいかは、このサイトでは確認していません。</li>
+        <li>これらのタグは、公式が、Photographer席で撮った写真を、SNSに載せるときにつけるよう案内しているものです。ほかの投稿にも、使われているかもしれません。</li>
+      </ul>
+    </div>
+
+    <h2 id="answer">セットリストの答え合わせ</h2>
+    <p class="pending">公演のあとに、実際の曲目が、公式や確かな報告でわかったら、ここに足します。<a href="live.html#prep">ライブ情報の予習ガイド</a>の曲と、見比べられるようにします。</p>
+
+    <h2 id="remove">掲載の削除・修正のお願い</h2>
+    <p>このページに載った感想を、消してほしい、直してほしいときは、次のフォームから、お知らせください。確認して、対応します。</p>
+    <form class="form-box" name="remove-request" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="remove-request">
+      <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
+      <div class="field">
+        <label class="label required" for="target">どの感想ですか?</label>
+        <input type="text" id="target" name="target" maxlength="100" required placeholder="例: 9月26日の公演の、ニックネーム「〇〇」の感想">
+      </div>
+      <div class="field">
+        <label class="label" for="request">お願いの内容(任意)</label>
+        <textarea id="request" name="request" rows="3" maxlength="300" placeholder="消してほしい、この部分を直してほしい、など"></textarea>
+      </div>
+      <button type="submit" class="submit-button">送信する</button>
+    </form>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>非公式ファンサイト / <a href="index.html">トップへ戻る</a> / <a href="about.html">このサイトについて</a></p>
+    </div>
+  </footer>
+
+  <script src="data/voices.js"></script>
+  <script src="report.js"></script>
+</body>
+</html>
