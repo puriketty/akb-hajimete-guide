@@ -20,6 +20,9 @@ const STYLES = ["現地", "配信"];
 const FIRST_LIVE_FIRST = "今回が初めて";
 const FIRST_LIVE_REPEAT = "参加経験あり";
 
+// 誰と行ったか(フォームと同じ文字列にする。任意)
+const COMPANIONS = ["ひとり", "友達と", "家族と"];
+
 // ファン歴の選択肢(フォームと同じ文字列にする)
 const FAN_YEARS = ["1年未満", "1年以上3年未満", "3年以上10年未満", "10年以上"];
 
@@ -29,7 +32,7 @@ const whoFilterBox = document.getElementById("voices-filter");
 
 // いま選ばれている絞り込み
 // 見た方法: "all" / "現地" / "配信"
-// どんな人: "all" / "first"(現地ライブ初参加) / "repeat"(現地参加経験あり) / "years:ファン歴" / "returned"(出戻り)
+// どんな人: "all" / "first"(現地ライブ初参加) / "solo"(ひとり参加・視聴) / "repeat"(現地参加経験あり) / "years:ファン歴" / "returned"(出戻り)
 let styleFilter = "all";
 let whoFilter = "all";
 
@@ -54,6 +57,7 @@ function normalize(v) {
       style === "現地" && (v.firstLive === FIRST_LIVE_FIRST || v.firstLive === FIRST_LIVE_REPEAT)
         ? v.firstLive
         : "",
+    companion: COMPANIONS.indexOf(v.companion) >= 0 ? v.companion : "",
     fanYears: FAN_YEARS.indexOf(v.fanYears) >= 0 ? v.fanYears : "",
     returned: v.returned === true,
     nickname: v.nickname,
@@ -72,6 +76,7 @@ function matchesStyle(v, filter) {
 function matchesWho(v, filter) {
   if (filter === "all") return true;
   if (filter === "first") return v.firstLive === FIRST_LIVE_FIRST;
+  if (filter === "solo") return v.companion === "ひとり";
   if (filter === "repeat") return v.firstLive === FIRST_LIVE_REPEAT;
   if (filter === "returned") return v.returned;
   if (filter.indexOf("years:") === 0) return v.fanYears === filter.slice(6);
@@ -109,6 +114,7 @@ const STYLE_OPTIONS = [{ id: "all", label: "すべて" }].concat(
 const WHO_OPTIONS = [
   { id: "all", label: "すべて" },
   { id: "first", label: "現地ライブ初参加", primary: true },
+  { id: "solo", label: "ひとり参加・視聴", primary: true },
   { id: "repeat", label: "現地参加経験あり" }
 ]
   .concat(
@@ -165,6 +171,12 @@ function renderCard(v) {
   if (v.style === "配信") badges.appendChild(el("span", "badge stream", "配信"));
   if (v.firstLive === FIRST_LIVE_FIRST) badges.appendChild(el("span", "badge first", "現地ライブ初参加"));
   if (v.firstLive === FIRST_LIVE_REPEAT) badges.appendChild(el("span", "badge", "現地参加経験あり"));
+  if (v.companion) {
+    // 現地は「参加」、配信は「視聴」と表示する
+    const verb = v.style === "配信" ? "視聴" : "参加";
+    const text = v.companion === "ひとり" ? "ひとり" + verb : v.companion + verb;
+    badges.appendChild(el("span", "badge", text));
+  }
   if (v.fanYears) badges.appendChild(el("span", "badge", "ファン歴 " + v.fanYears));
   if (v.returned) badges.appendChild(el("span", "badge return", "出戻り"));
   if (badges.children.length > 0) card.appendChild(badges);
