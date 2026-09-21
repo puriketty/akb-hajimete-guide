@@ -836,3 +836,6 @@ button {
   .card strong { font-size: 1rem; margin-bottom: 2px; }
   .card span { font-size: 0.85rem; }
 }
+
+/* 運営者の体験のラベル */
+.ex.owner { background: #fff0f6; border-color: #f3c0d6; color: #a12a5e; }
