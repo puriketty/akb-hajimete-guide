@@ -509,6 +509,63 @@ textarea { resize: vertical; }
   main td.nowrap { white-space: nowrap; }
 }
 
+/* ===================================================
+   ペンライトカラー一覧・持ち物ガイド
+   =================================================== */
+.pl-filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.pl-filter {
+  padding: 4px 12px;
+  border: 2px solid rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pl-filter[aria-pressed="true"] { outline: 3px solid var(--pink-deep); outline-offset: 2px; }
+.pl-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 8px 0;
+  padding: 8px 12px;
+  background: #fff;
+  border: 2px solid var(--pink-soft);
+  border-radius: 14px;
+}
+.pl-left { display: flex; flex-direction: column; }
+.pl-name { font-weight: 700; }
+.pl-src { font-size: 0.7rem; color: var(--gray); }
+.pl-chips { display: flex; gap: 6px; }
+.pl-chip {
+  min-width: 68px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+.muted { color: var(--gray); font-size: 0.9rem; }
+
+/* 情報のラベル(公式・ファンの声・このサイトの提案) */
+.ex.fan { background: #eef6ff; border-color: #bcd7f5; color: #245a94; }
+.ex.mine { background: #f2f7ec; border-color: #c9deb5; color: #476b28; }
+
+.checklist { list-style: none; padding: 0; margin: 10px 0; }
+.checklist li { margin: 6px 0; }
+.checklist label {
+  display: block;
+  padding: 8px 12px;
+  background: #fff;
+  border: 2px solid var(--pink-soft);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.checklist input { margin-right: 8px; }
+
 /* ===== 一番下 ===== */
 .site-footer {
   margin-top: 56px;
