@@ -1,0 +1,6 @@
+# Netlify CLI の接続情報(このPC専用)
+.netlify/
+
+# アップロード用のZIPや一時ファイル
+*.zip
+node_modules/

@@ -1,0 +1,4 @@
+# Netlify の設定。HTML / CSS / JavaScript だけなので、ビルドは不要です。
+# 公開するのは site フォルダの中身だけ(この設定ファイルや CLAUDE.md、README.md は公開されません)。
+[build]
+  publish = "site"

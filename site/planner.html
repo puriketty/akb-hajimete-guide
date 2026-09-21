@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>部割プランナー|初めてのAKB48ガイド</title>
+  <meta name="description" content="会いたいメンバーを選ぶと、握手会のどの部の参加権利を取ればみんなに会えるかを教えてくれるツールです。(非公式ファンサイト)">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-name" href="index.html">初めてのAKB48ガイド</a>
+      <nav class="site-nav">
+        <a href="theater.html">劇場公演</a>
+        <a href="handshake.html">握手会</a>
+        <a href="planner.html">部割プランナー</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <h1>部割プランナー</h1>
+    <p>会いたいメンバーを選ぶと、<strong>どの部の参加権利を取れば全員に会えるか</strong> を計算します。</p>
+    <p class="pending">握手会では、メンバーごとに「出る部」が決まっています。人気メンバーは列が長くなりやすいので、初めのうちは「1部に1人ずつ」に分けると安心です。</p>
+
+    <div class="notice">
+      <strong>使う前に読んでください</strong>
+      <ul>
+        <li>部割は、運営が出したスケジュールを書き写したものです。間違いがあるかもしれません。申し込む前に、必ず公式の最新スケジュールを確認してください。部割は急に変わることもあります。</li>
+        <li>このツールは「部割の組み合わせ」を調べるだけです。実際の参加権利は抽選や完売があるので、必ず取れるとは限りません。</li>
+        <li>いま入っているのは、<strong>開催済みの握手会のデータ</strong>(使い方を試すための例)です。</li>
+      </ul>
+    </div>
+
+    <div class="step">
+      <p class="step-title"><span class="num">1</span>握手会を選ぶ</p>
+      <select id="event-select" aria-label="握手会を選ぶ"></select>
+      <p id="event-info" class="muted"></p>
+    </div>
+
+    <div class="step">
+      <p class="step-title"><span class="num">2</span>会いたいメンバーを選ぶ</p>
+      <input id="search" type="search" placeholder="名前で絞りこむ(例: 山)" aria-label="メンバー名で絞りこむ">
+      <div id="chips" class="chips"></div>
+      <div class="selected-line">
+        <span id="selected-count">0人 選んでいます</span>
+        <button id="clear-button" class="small-button" type="button">選択をクリア</button>
+      </div>
+    </div>
+
+    <div class="step">
+      <p class="step-title"><span class="num">3</span>1つの部に、何人まで入れる?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="capacity" value="1" checked><span>1人まで(初心者におすすめ)</span></label>
+        <label class="option"><input type="radio" name="capacity" value="2"><span>2人まで</span></label>
+        <label class="option"><input type="radio" name="capacity" value="3"><span>3人まで</span></label>
+      </div>
+    </div>
+
+    <h2>おすすめのプラン</h2>
+    <div id="result" aria-live="polite"></div>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>非公式ファンサイト / <a href="index.html">トップへ戻る</a></p>
+    </div>
+  </footer>
+
+  <script src="data/events.js"></script>
+  <script src="planner.js"></script>
+</body>
+</html>
