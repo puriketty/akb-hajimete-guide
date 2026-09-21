@@ -25,7 +25,7 @@ function el(tag, className, text) {
 }
 
 function currentEvent() {
-  return EVENTS[eventSelect.selectedIndex];
+  return EVENTS[Number(eventSelect.value)];
 }
 
 // 「1つの部に何人まで」の設定を読み取る
@@ -107,7 +107,7 @@ function renderEventInfo() {
   eventInfo.appendChild(el("strong", "", ev.title));
   eventInfo.appendChild(document.createTextNode("(" + ev.status + ")"));
   eventInfo.appendChild(el("br"));
-  eventInfo.appendChild(document.createTextNode("部割の確認日: " + ev.checkedAt + " / "));
+  eventInfo.appendChild(document.createTextNode("種類: " + (ev.type || "不明") + " / 部割の確認日: " + ev.checkedAt + " / "));
   const link = el("a", "", "公式のスケジュール(PDF)");
   link.href = ev.source;
   link.target = "_blank";
@@ -225,8 +225,18 @@ function render() {
 // ------------------------------------------------------------
 // スタート
 // ------------------------------------------------------------
-EVENTS.forEach(function (ev) {
-  eventSelect.appendChild(el("option", "", ev.title));
+// 握手会を、種類(type)ごとにまとめて選べるようにする
+const groups = {};
+EVENTS.forEach(function (ev, index) {
+  const type = ev.type || "その他";
+  if (!groups[type]) {
+    groups[type] = el("optgroup");
+    groups[type].label = type;
+    eventSelect.appendChild(groups[type]);
+  }
+  const option = el("option", "", ev.title);
+  option.value = String(index);
+  groups[type].appendChild(option);
 });
 
 eventSelect.addEventListener("change", function () {

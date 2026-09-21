@@ -225,6 +225,47 @@ th { background: var(--pink-light); color: var(--pink-deep); }
   font-weight: 700;
 }
 
+/* ===== 手順のステップ(申し込みガイド) ===== */
+.steps { list-style: none; counter-reset: step; padding: 0; margin: 14px 0; }
+.steps > li {
+  counter-increment: step;
+  position: relative;
+  margin: 12px 0;
+  padding: 12px 14px 12px 58px;
+  background: #fff;
+  border: 2px solid var(--pink-soft);
+  border-radius: var(--radius);
+}
+.steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 14px;
+  top: 12px;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  font-weight: 700;
+}
+.steps > li > strong:first-child { color: var(--pink-deep); }
+
+/* 「68thシングルの例」のラベル */
+.ex {
+  display: inline-block;
+  margin: 0 2px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--pink-light);
+  border: 1px solid var(--pink-soft);
+  color: var(--pink-deep);
+  font-size: 0.75rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
 /* ===== 一番下 ===== */
 .site-footer {
   margin-top: 56px;
