@@ -187,6 +187,44 @@ th { background: var(--pink-light); color: var(--pink-deep); }
   font-size: 0.93rem;
 }
 
+/* ===== 最終確認日のラベル ===== */
+.updated {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 1px 14px;
+  border-radius: 999px;
+  background: var(--pink-light);
+  border: 2px solid var(--pink-soft);
+  color: var(--pink-deep);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ===== 目次 ===== */
+.toc {
+  margin: 20px 0 8px;
+  padding: 14px 18px 12px;
+  background: var(--pink-light);
+  border: 2px solid var(--pink-soft);
+  border-radius: var(--radius);
+}
+.toc-title { margin: 0 0 4px; font-weight: 700; color: var(--pink-deep); }
+.toc ol { margin: 0; padding-left: 1.6em; }
+.toc li { margin: 2px 0; }
+.toc a { text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+
+/* ===== 更新情報 ===== */
+.news { list-style: none; padding: 0; margin: 0; }
+.news li { padding: 8px 4px; border-bottom: 2px dotted var(--pink-soft); }
+.news .date {
+  display: inline-block;
+  min-width: 6.2em;
+  margin-right: 8px;
+  color: var(--pink-deep);
+  font-weight: 700;
+}
+
 /* ===== 一番下 ===== */
 .site-footer {
   margin-top: 56px;
