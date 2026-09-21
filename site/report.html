@@ -66,23 +66,60 @@
     </nav>
 
     <h2 id="voices">行った人の声</h2>
-    <div id="voices-filter" class="filter-chips" aria-label="AKB歴で絞り込む"></div>
+    <p class="hint">感想は、公演ごとに、現地・配信の両方を載せています。「現地」「配信」のラベルで、見分けられます。</p>
+    <div class="filter-group">
+      <p class="filter-title">見た方法</p>
+      <div id="voices-filter-style" class="filter-chips" aria-label="現地・配信で絞り込む"></div>
+    </div>
+    <div class="filter-group">
+      <p class="filter-title">どんな人の感想?</p>
+      <div id="voices-filter" class="filter-chips" aria-label="現地ライブ初参加・ファン歴で絞り込む"></div>
+    </div>
     <div id="voices-list"></div>
 
     <h2 id="post">感想を送る</h2>
-    <p>行った公演の感想を、送ってください。初めて行った人の感想も、長く応援している人の感想も、歓迎です。<a href="#rules">掲載のルール</a>を、先に読んでください。</p>
-    <form class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+    <p>行った公演の感想を、送ってください。初めて行った人の感想も、長く応援している人の感想も、歓迎です。配信で見た人の感想も、歓迎です。<a href="#rules">掲載のルール</a>を、先に読んでください。</p>
+    <p><strong>1回の送信で書けるのは、1公演分の感想です。</strong>複数の公演について書きたいときは、公演ごとに、分けて送ってください。</p>
+    <form id="voice-form" class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="voice">
       <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
 
-      <div class="field">
-        <span class="label">行った公演(あてはまるものすべて)</span>
+      <div class="field" role="radiogroup" aria-labelledby="q-show">
+        <span class="label required" id="q-show">どの公演の感想ですか?</span>
         <div class="checks">
-          <label><input type="checkbox" name="shows" value="9/26 12:30 新曲「好きish」コンサート"> 9月26日(土)12:30 新曲「好きish」コンサート</label>
-          <label><input type="checkbox" name="shows" value="9/26 18:30 全員「好きish」コンサート"> 9月26日(土)18:30 全員「好きish」コンサート</label>
-          <label><input type="checkbox" name="shows" value="9/27 16:00 推しが「好きish」コンサート"> 9月27日(日)16:00 推しが「好きish」コンサート</label>
-          <label><input type="checkbox" name="shows" value="配信(Hulu)で見た"> 配信(Hulu)で見た</label>
+          <label><input type="radio" name="show" value="9/26 12:30 新曲「好きish」コンサート" required> 9月26日(土)12:30 新曲「好きish」コンサート</label>
+          <label><input type="radio" name="show" value="9/26 18:30 全員「好きish」コンサート" required> 9月26日(土)18:30 全員「好きish」コンサート</label>
+          <label><input type="radio" name="show" value="9/27 16:00 推しが「好きish」コンサート" required> 9月27日(日)16:00 推しが「好きish」コンサート</label>
         </div>
+      </div>
+
+      <div class="field" role="radiogroup" aria-labelledby="q-style">
+        <span class="label required" id="q-style">どのように見ましたか?</span>
+        <div class="checks">
+          <label><input type="radio" name="style" value="現地" required> 現地(Kアリーナ横浜で見た)</label>
+          <label><input type="radio" name="style" value="配信" required> 配信(Huluで見た。生配信でも、見逃し配信でも)</label>
+        </div>
+      </div>
+
+      <div class="field" id="first-live-field" role="radiogroup" aria-labelledby="q-first-live">
+        <span class="label" id="q-first-live">(現地で見た人だけ)今回は、現地ライブの初参加ですか?</span>
+        <div class="checks">
+          <label><input type="radio" name="first_live" value="今回が初めて"> 今回が、現地ライブの初参加</label>
+          <label><input type="radio" name="first_live" value="参加経験あり"> 過去にも、現地ライブに参加したことがある</label>
+        </div>
+        <span class="hint">ファンになってからの長さとは、別の質問です。長く応援していても、現地ライブが初めてなら、「初参加」を選んでください。</span>
+      </div>
+
+      <div class="field" role="radiogroup" aria-labelledby="q-fan-years">
+        <span class="label" id="q-fan-years">ファン歴(任意)</span>
+        <div class="checks">
+          <label><input type="radio" name="fan_years" value="1年未満"> 1年未満</label>
+          <label><input type="radio" name="fan_years" value="1年以上3年未満"> 1年以上3年未満</label>
+          <label><input type="radio" name="fan_years" value="3年以上10年未満"> 3年以上10年未満</label>
+          <label><input type="radio" name="fan_years" value="10年以上"> 10年以上</label>
+          <label><input type="checkbox" name="returned" value="yes"> 一度離れて、<strong>戻ってきた</strong>(出戻り)</label>
+        </div>
+        <span class="hint">答えなくても、送れます。感想に、ラベルとして表示されます。年齢は、聞きません。</span>
       </div>
 
       <div class="field">
@@ -92,21 +129,18 @@
       </div>
 
       <div class="field">
-        <span class="label required">AKB歴(ファン歴)</span>
-        <div class="checks">
-          <label><input type="radio" name="history" value="今回が初めて" required> 今回が初めて</label>
-          <label><input type="radio" name="history" value="1年未満"> 1年未満</label>
-          <label><input type="radio" name="history" value="1〜3年"> 1〜3年</label>
-          <label><input type="radio" name="history" value="3〜10年"> 3〜10年</label>
-          <label><input type="radio" name="history" value="10年以上"> 10年以上</label>
-          <label><input type="checkbox" name="returned" value="yes"> 一度離れて、<strong>戻ってきた</strong>(出戻り)</label>
-        </div>
-        <span class="hint">感想に、「AKB歴」のラベルとして表示されます。年齢は、聞きません。</span>
-      </div>
-      <div class="field">
         <label class="label required" for="message">感想</label>
-        <textarea id="message" name="message" rows="7" maxlength="600" required placeholder="よかった曲やシーン、初めて行った人へのアドバイス、意外だったこと、など"></textarea>
-        <span class="hint">600文字までです。</span>
+        <div class="write-hints" id="write-hints">
+          <p class="write-hints-title">書くときのヒント: 全部に答えなくても、一言の感想でも大丈夫です</p>
+          <ul>
+            <li>行く前に、不安だったことは?</li>
+            <li>実際に参加して、どうだった?</li>
+            <li>次に初めて行く人へ、ひとつ伝えるなら?</li>
+            <li>好きだった曲や、印象に残った場面は?</li>
+          </ul>
+        </div>
+        <textarea id="message" name="message" rows="5" maxlength="600" required aria-describedby="write-hints message-count" placeholder="ひとことでも、大丈夫です"></textarea>
+        <span class="hint counter" id="message-count"><span id="message-length">0</span>/600文字</span>
       </div>
 
       <div class="field">
@@ -117,12 +151,12 @@
 
       <div class="field">
         <div class="checks">
-          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。ニックネーム・感想・AKB歴のラベルを、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます)</label>
+          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。ニックネーム・感想・見た公演・現地か配信か・ファン歴などのラベル・ネタバレの有無を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます)</label>
         </div>
       </div>
 
       <button type="submit" class="submit-button">送信する</button>
-      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想の、ニックネーム・感想・AKB歴のラベルだけです。</p>
+      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想の、ニックネーム・感想・見た公演・現地か配信か・現地ライブ初参加かどうか・ファン歴・出戻りのラベル・ネタバレの有無だけです。</p>
     </form>
 
     <h2 id="rules">掲載のルール</h2>
@@ -138,7 +172,7 @@
         </ul>
       </li>
       <li>運営者が読んで、<strong>載せるものを選びます。すべてが載るわけではありません。</strong>意味が変わらない範囲で、誤字を直したり、長い文章を短くしたりすることがあります。</li>
-      <li>載せるのは、<strong>ニックネーム、感想、AKB歴のラベル</strong>だけです。</li>
+      <li>載せるのは、<strong>ニックネーム、感想、見た公演、現地か配信か、現地ライブ初参加かどうか、ファン歴、出戻りのラベル、ネタバレの有無</strong>だけです。答えなかった項目は、載りません。</li>
       <li>ネタバレを含む感想は、「ネタバレを含む」にチェックが入っていて、押すまで読めない形で載せます。</li>
     </ul>
 
@@ -189,5 +223,6 @@
 
   <script src="data/voices.js"></script>
   <script src="report.js"></script>
+  <script src="report-form.js"></script>
 </body>
 </html>
