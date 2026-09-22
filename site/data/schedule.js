@@ -51,6 +51,7 @@ const SCHEDULE = [
     venue: "Kアリーナ横浜",
     summary: "3つのコンセプトの全3公演(9/26 12:30・9/26 18:30・9/27 16:00)。",
     guide: { label: "公演の概要・チケット・入場のルール", href: "live.html#three" },
+    extra: [{ label: "会場ガイド(Kアリーナ横浜の行き方・宿泊)", href: "venues.html#k-arena" }],
     setlist: { href: "live.html#setlist", published: false },
     voices: { href: "report.html#voices" },
     official: [
@@ -68,6 +69,7 @@ const SCHEDULE = [
     venue: "幕張メッセ 展示ホール1・2",
     summary: "ライブパフォーマンスのあとに、グループ握手会とまとめ出し個別握手会があります。",
     guide: { label: "東京握手会の予定", href: "national.html#tokyo" },
+    extra: [{ label: "会場ガイド(幕張メッセの行き方・宿泊)", href: "venues.html#makuhari" }],
     official: [
       { label: "東京握手会のご案内(公式)", url: "https://www.universal-music.co.jp/akb48/news/2026-08-14-5/" },
       { label: "初回限定盤の握手会の案内(公式)", url: "https://www.akb48.co.jp/lp/68th-single/event_limited-edition.html" }
