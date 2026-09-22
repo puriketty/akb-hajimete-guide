@@ -9,8 +9,18 @@ const listBox = document.getElementById("penlight-list");
 const searchBox = document.getElementById("penlight-search");
 const colorBox = document.getElementById("penlight-colors");
 const countBox = document.getElementById("penlight-count");
+const castCheck = document.getElementById("penlight-cast-only");
+const castNote = document.getElementById("penlight-cast-note");
 
 let selectedColor = null; // いま選ばれている色(なければ null)
+const CAST = (PENLIGHT.eventCasts && PENLIGHT.eventCasts["three-concepts-live"]) || null;
+
+if (CAST && castCheck) {
+  castCheck.closest(".field").hidden = false;
+  castNote.textContent =
+    CAST.label + "(" + CAST.checkedAt + "確認)。22期研究生は、この公演から出演しますが、名前がまだ公式に発表されていないため、載っていません。";
+  castCheck.addEventListener("change", render);
+}
 
 const SOURCE_LABEL = {
   official2022: "公式の一覧(2022年10月)",
@@ -75,6 +85,7 @@ function render() {
       if (m.group !== group) return false;
       if (query && m.name.indexOf(query) === -1) return false;
       if (selectedColor && m.colors.indexOf(selectedColor) === -1) return false;
+      if (CAST && castCheck && castCheck.checked && CAST.names.indexOf(m.name) === -1) return false;
       return true;
     });
     if (members.length === 0) return;

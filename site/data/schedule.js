@@ -48,10 +48,14 @@ const SCHEDULE = [
     dateLabel: "2026年9月26日(土)・27日(日)",
     start: "2026-09-26",
     lastDay: "2026-09-27",
+    endsAt: "2026-09-27T22:00:00+09:00", // 終演時刻は未発表。9/27の最終公演(16:00開演)が、この時刻までには終わっている想定の目安(ページには表示しない、内部の切り替え用)
     venue: "Kアリーナ横浜",
     summary: "3つのコンセプトの全3公演(9/26 12:30・9/26 18:30・9/27 16:00)。",
     guide: { label: "公演の概要・チケット・入場のルール", href: "live.html#three" },
-    extra: [{ label: "会場ガイド(Kアリーナ横浜の行き方・宿泊)", href: "venues.html#k-arena" }],
+    extra: [
+      { label: "会場ガイド(Kアリーナ横浜の行き方・宿泊)", href: "venues.html#k-arena" },
+      { label: "初参加者の声まとめ", href: "report.html#first" }
+    ],
     setlist: { href: "live.html#setlist", published: false },
     voices: { href: "report.html#voices" },
     official: [
