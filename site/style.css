@@ -328,7 +328,27 @@ textarea { resize: vertical; }
 }
 .voice .who { margin: 0; font-weight: 700; color: var(--pink-deep); }
 .voice .body { margin: 4px 0 0; white-space: pre-wrap; }
+.voice .advice {
+  margin: 6px 0 0;
+  padding: 6px 10px;
+  background: var(--pink-light);
+  border-left: 4px solid var(--pink);
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+.voice .advice strong { color: var(--pink-deep); }
 .voice details summary { cursor: pointer; color: var(--pink-deep); font-weight: 700; }
+
+/* セットリストなど、単体で使う折りたたみ(ネタバレ防止) */
+.spoiler-box {
+  margin: 10px 0;
+  padding: 10px 14px;
+  background: #fff;
+  border: 2px solid var(--pink-soft);
+  border-radius: var(--radius);
+}
+.spoiler-box summary { cursor: pointer; font-weight: 700; color: var(--pink-deep); }
+.spoiler-box p { margin: 8px 0 0; }
 
 /* ===================================================
    ページごとの雰囲気(テーマ)
@@ -839,3 +859,25 @@ button {
 
 /* 運営者の体験のラベル */
 .ex.owner { background: #fff0f6; border-color: #f3c0d6; color: #a12a5e; }
+/* ===== トップの「今週末はライブ」帯(日付で自動切り替え) ===== */
+.week-banner {
+  margin: 0 0 20px;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+  border-radius: var(--radius);
+  color: #fff;
+}
+.week-banner-title { margin: 0 0 6px; font-size: 1.15rem; font-weight: 700; line-height: 1.4; }
+.week-banner p { margin: 4px 0; }
+.week-banner-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.week-banner-links a {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--pink-deep);
+  font-weight: 700;
+  text-decoration: none;
+}
+.week-banner-links a:hover { background: var(--pink-light); }
+.week-banner-note { font-size: 0.9rem; }
+.week-banner-note a, .week-banner a:not(.week-banner-links a) { color: #fff; text-decoration: underline; }

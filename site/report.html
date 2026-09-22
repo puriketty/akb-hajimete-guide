@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="analytics.js"></script>
   <title>ライブレポ・みんなの声|AKB48 THREE CONCEPTS LIVE(2026年9月26・27日)に行った人の感想</title>
   <meta name="description" content="AKB48 THREE CONCEPTS LIVE(2026年9月26日・27日)に行った人の感想を集めるページです。感想を送るフォーム、掲載のルール、Xの公式ハッシュタグで見る方法をまとめています。(非公式ファンサイト)">
   <link rel="canonical" href="https://akb-hajimete-guide.netlify.app/report.html">
@@ -133,6 +134,71 @@
       </div>
 
       <div class="field">
+        <label class="label" for="prefecture">どこから来ましたか?(都道府県・任意)</label>
+        <select id="prefecture" name="prefecture">
+          <option value="">選ばない</option>
+          <option value="北海道">北海道</option>
+          <option value="青森県">青森県</option>
+          <option value="岩手県">岩手県</option>
+          <option value="宮城県">宮城県</option>
+          <option value="秋田県">秋田県</option>
+          <option value="山形県">山形県</option>
+          <option value="福島県">福島県</option>
+          <option value="茨城県">茨城県</option>
+          <option value="栃木県">栃木県</option>
+          <option value="群馬県">群馬県</option>
+          <option value="埼玉県">埼玉県</option>
+          <option value="千葉県">千葉県</option>
+          <option value="東京都">東京都</option>
+          <option value="神奈川県">神奈川県</option>
+          <option value="新潟県">新潟県</option>
+          <option value="富山県">富山県</option>
+          <option value="石川県">石川県</option>
+          <option value="福井県">福井県</option>
+          <option value="山梨県">山梨県</option>
+          <option value="長野県">長野県</option>
+          <option value="岐阜県">岐阜県</option>
+          <option value="静岡県">静岡県</option>
+          <option value="愛知県">愛知県</option>
+          <option value="三重県">三重県</option>
+          <option value="滋賀県">滋賀県</option>
+          <option value="京都府">京都府</option>
+          <option value="大阪府">大阪府</option>
+          <option value="兵庫県">兵庫県</option>
+          <option value="奈良県">奈良県</option>
+          <option value="和歌山県">和歌山県</option>
+          <option value="鳥取県">鳥取県</option>
+          <option value="島根県">島根県</option>
+          <option value="岡山県">岡山県</option>
+          <option value="広島県">広島県</option>
+          <option value="山口県">山口県</option>
+          <option value="徳島県">徳島県</option>
+          <option value="香川県">香川県</option>
+          <option value="愛媛県">愛媛県</option>
+          <option value="高知県">高知県</option>
+          <option value="福岡県">福岡県</option>
+          <option value="佐賀県">佐賀県</option>
+          <option value="長崎県">長崎県</option>
+          <option value="熊本県">熊本県</option>
+          <option value="大分県">大分県</option>
+          <option value="宮崎県">宮崎県</option>
+          <option value="鹿児島県">鹿児島県</option>
+          <option value="沖縄県">沖縄県</option>
+          <option value="海外">海外</option>
+        </select>
+        <span class="hint">答えなくても、送れます。遠征する人向けの案内(会場までの行き方など)を考える参考にするだけで、<strong>感想と一緒には載せません</strong>。</span>
+      </div>
+
+      <div class="field">
+        <span class="label">前泊・後泊はしましたか?(任意)</span>
+        <div class="checks">
+          <label><input type="checkbox" name="stayed" value="前泊した"> 前泊した</label>
+          <label><input type="checkbox" name="stayed" value="後泊した"> 後泊した</label>
+        </div>
+        <span class="hint">答えなくても、送れます。日帰りの人は、どちらも選ばなくて大丈夫です。<strong>感想と一緒には載せません</strong>。</span>
+      </div>
+
+      <div class="field">
         <label class="label" for="nickname">ニックネーム(任意)</label>
         <input type="text" id="nickname" name="nickname" maxlength="20" autocomplete="off" placeholder="例: 初めてのAKBファン">
         <span class="hint">本名や、SNSのアカウント名は、書かないでください。空欄なら「匿名」で載ります。</span>
@@ -154,6 +220,12 @@
       </div>
 
       <div class="field">
+        <label class="label" for="advice">次に初めて行く人への、ひと言アドバイス(任意)</label>
+        <input type="text" id="advice" name="advice" maxlength="100" placeholder="例: 開場の時間に着くと、ロッカーで慌てませんでした">
+        <span class="hint">答えなくても、送れます。載せてもらえたときは、感想のとなりに、目立つ形で表示します。</span>
+      </div>
+
+      <div class="field">
         <div class="checks">
           <label><input type="checkbox" name="spoiler" value="yes"> 曲目や演出など、<strong>ネタバレを含む</strong></label>
         </div>
@@ -161,12 +233,12 @@
 
       <div class="field">
         <div class="checks">
-          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。ニックネーム・感想・見た公演・現地か配信か・誰と行ったか・ファン歴などのラベル・ネタバレの有無を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます)</label>
+          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。ニックネーム・感想・見た公演・現地か配信か・誰と行ったか・アドバイス・ファン歴などのラベル・ネタバレの有無を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます)</label>
         </div>
       </div>
 
       <button type="submit" class="submit-button">送信する</button>
-      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想の、ニックネーム・感想・見た公演・現地か配信か・誰と行ったか・現地ライブ初参加かどうか・ファン歴・出戻りのラベル・ネタバレの有無だけです。</p>
+      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想の、ニックネーム・感想・見た公演・現地か配信か・誰と行ったか・アドバイス・現地ライブ初参加かどうか・ファン歴・出戻りのラベル・ネタバレの有無だけです。「どこから来たか」「前泊・後泊」は、感想と一緒には載せません。</p>
     </form>
 
     <h2 id="rules">掲載のルール</h2>
@@ -182,7 +254,7 @@
         </ul>
       </li>
       <li>運営者が読んで、<strong>載せるものを選びます。すべてが載るわけではありません。</strong>意味が変わらない範囲で、誤字を直したり、長い文章を短くしたりすることがあります。</li>
-      <li>載せるのは、<strong>ニックネーム、感想、見た公演、現地か配信か、誰と行ったか、現地ライブ初参加かどうか、ファン歴、出戻りのラベル、ネタバレの有無</strong>だけです。答えなかった項目は、載りません。</li>
+      <li>載せるのは、<strong>ニックネーム、感想、見た公演、現地か配信か、誰と行ったか、アドバイス、現地ライブ初参加かどうか、ファン歴、出戻りのラベル、ネタバレの有無</strong>だけです。答えなかった項目は、載りません。「どこから来たか」「前泊・後泊」は、感想と一緒には載せません。</li>
       <li>ネタバレを含む感想は、「ネタバレを含む」にチェックが入っていて、押すまで読めない形で載せます。</li>
     </ul>
 

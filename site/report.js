@@ -62,6 +62,7 @@ function normalize(v) {
     returned: v.returned === true,
     nickname: v.nickname,
     text: v.text,
+    advice: typeof v.advice === "string" && v.advice.trim() ? v.advice.trim() : "",
     spoiler: v.spoiler === true,
     date: v.date
   };
@@ -181,6 +182,13 @@ function renderCard(v) {
   if (v.returned) badges.appendChild(el("span", "badge return", "出戻り"));
   if (badges.children.length > 0) card.appendChild(badges);
 
+  if (v.advice) {
+    const advice = el("p", "advice");
+    advice.appendChild(el("strong", "", "次に初めて行く人へ: "));
+    advice.appendChild(document.createTextNode(v.advice));
+    card.appendChild(advice);
+  }
+
   if (v.spoiler) {
     const details = el("details");
     details.appendChild(el("summary", "", "ネタバレを含みます(押すと読めます)"));
@@ -233,4 +241,13 @@ function render() {
   }
 }
 
+// URLが「#first」のときは、最初から「現地ライブ初参加」で絞り込んで表示する
+// (「初参加者の声まとめ」への直接リンク用。例: report.html#first)
+if (location.hash === "#first") {
+  whoFilter = "first";
+}
 render();
+if (location.hash === "#first") {
+  const heading = document.getElementById("voices");
+  if (heading) heading.scrollIntoView();
+}
