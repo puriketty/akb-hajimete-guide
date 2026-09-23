@@ -57,7 +57,10 @@ function fieldLabel(field) {
 function showFieldError(field) {
   clearFieldError(field);
   let message;
-  if (field.type === "email" && field.validity.typeMismatch) {
+  if (field.validity.customError) {
+    // ほかのスクリプト(report-form.js など)が setCustomValidity で用意した、専用のメッセージ
+    message = field.validationMessage;
+  } else if (field.type === "email" && field.validity.typeMismatch) {
     message = "メールアドレスの形式で入力してください。";
   } else if (field.type === "radio" || field.type === "checkbox") {
     message = fieldLabel(field) + "を選んでください。";
