@@ -602,7 +602,9 @@ textarea { resize: vertical; }
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--pink-light);
-  border: 2px dashed var(--pink-soft);
+  border: 2px solid var(--pink-soft);
+  object-fit: cover;
+  object-position: center;
 }
 
 .checklist { list-style: none; padding: 0; margin: 10px 0; }
