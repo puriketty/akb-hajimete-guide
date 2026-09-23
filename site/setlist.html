@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="analytics.js"></script>
+  <title>劇場公演のセットリスト|聴いた曲をその場で探せる(2026年9月確認)</title>
+  <meta name="description" content="AKB48劇場公演のセットリストから、聴いた曲をApple Music・Spotify・YouTube Musicで探せます。歌詞は載せていません。まずは「ここからだ」公演の1公演分。(非公式ファンサイト)">
+  <link rel="canonical" href="https://akb-hajimete-guide.netlify.app/setlist.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="初めてのAKB48ガイド">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="劇場公演のセットリスト|聴いた曲をその場で探せる">
+  <meta property="og:description" content="公演で聴いた曲を、Apple Music・Spotify・YouTube Musicで探せます。">
+  <meta property="og:url" content="https://akb-hajimete-guide.netlify.app/setlist.html">
+  <meta property="og:image" content="https://akb-hajimete-guide.netlify.app/ogp.png">
+  <meta property="og:image:alt" content="初めてのAKB48ガイド(非公式ファンサイト)">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-theater">
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-name" href="index.html">初めてのAKB48ガイド</a>
+      <nav class="site-nav">
+        <a href="live.html">ライブ</a>
+        <a href="handshakes.html">握手会</a>
+        <a href="theater.html">劇場公演</a>
+        <a href="apply.html">申し込み</a>
+        <a href="report.html">みんなの声</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="hero-emoji" aria-hidden="true">🎵</span>
+      <p class="hero-title">劇場公演のセットリスト</p>
+      <p class="hero-sub">聴いた曲を、その場で探せます</p>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <h1 id="setlist-title">劇場公演のセットリスト</h1>
+    <p>公演で聴いて気になった曲を、その場で探せます。曲名をタップすると、配信サービスで探すボタンが出ます。</p>
+    <div class="notice">
+      歌詞は載せていません。曲名をもとに、Apple Music・Spotify・YouTube Musicの<strong>検索ページ</strong>を開くだけです(正確な曲のページとは限りません)。アフィリエイトリンクは使っていません。
+    </div>
+
+    <ul id="setlist-songs" class="setlist-list"></ul>
+
+    <p id="setlist-source" class="summary-scope"></p>
+    <p class="summary-scope">公演の内容は変わることがあります。最新は<a href="https://www.akb48.co.jp/about/song/list?stage=72" target="_blank" rel="noopener">公式サイト</a>をご確認ください。</p>
+    <p>持ち物や当日の流れは、<a href="theater.html">劇場公演ガイド</a>を見てください。初めてのライブの前には、<a href="preview.html#ranking">よく歌われた15曲</a>も予習できます。</p>
+
+  </main>
+
+  <div id="song-sheet-overlay" class="sheet-overlay" hidden></div>
+  <div id="song-sheet" class="bottom-sheet" hidden aria-hidden="true" role="dialog" aria-labelledby="song-sheet-title">
+    <div class="bottom-sheet-handle" aria-hidden="true"></div>
+    <h2 id="song-sheet-title"></h2>
+    <p id="song-sheet-credit" class="muted"></p>
+    <div class="bottom-sheet-buttons">
+      <a id="song-sheet-apple" class="streaming-button" target="_blank" rel="noopener">Apple Musicで探す</a>
+      <a id="song-sheet-spotify" class="streaming-button" target="_blank" rel="noopener">Spotifyで探す</a>
+      <a id="song-sheet-youtube" class="streaming-button" target="_blank" rel="noopener">YouTube Musicで探す</a>
+    </div>
+    <p><a id="song-sheet-official" target="_blank" rel="noopener">公式の公演ページを見る</a></p>
+    <button type="button" id="song-sheet-close" class="small-button">閉じる</button>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>非公式ファンサイト / <a href="index.html">トップへ戻る</a> / <a href="past.html">過去の公演</a> / <a href="about.html">このサイトについて</a> / <a href="contact.html">お問い合わせ</a></p>
+    </div>
+  </footer>
+
+  <script src="data/songs.js"></script>
+  <script src="data/setlists.js"></script>
+  <script src="setlist.js"></script>
+</body>
+</html>
