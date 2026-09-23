@@ -71,9 +71,8 @@
     <h2 id="vote">お楽しみ投票:もう一度見たいのはどの公演?</h2>
     <div id="vote-widget" hidden>
       <p class="hint">お楽しみ投票です。1人1票でお願いします。現地・配信、どちらで見た人も投票できます。結果は、投票の受付が終わったあとに発表します。</p>
-      <form id="vote-form" class="form-box" name="vote" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+      <form id="vote-form" class="form-box" name="vote" method="POST" action="/thanks.html" data-netlify="true">
         <input type="hidden" name="form-name" value="vote">
-        <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
         <div class="field" role="radiogroup" aria-labelledby="q-vote-show">
           <span class="label required" id="q-vote-show">もう一度見たいのは、どの公演?</span>
           <div class="checks">
@@ -99,9 +98,8 @@
     <h2 id="post">感想を送る</h2>
     <p>行った公演の感想を、送ってください。初めて行った人の感想も、長く応援している人の感想も、歓迎です。配信で見た人の感想も、歓迎です。<a href="#rules">掲載のルール</a>を、先に読んでください。</p>
     <p><strong>1回の送信で書けるのは、1公演分の感想です。</strong>複数の公演について書きたいときは、公演ごとに、分けて送ってください。</p>
-    <form id="voice-form" class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+    <form id="voice-form" class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true">
       <input type="hidden" name="form-name" value="voice">
-      <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
 
       <div class="field" role="radiogroup" aria-labelledby="q-show">
         <span class="label required" id="q-show">どの公演の感想ですか?</span>
@@ -235,9 +233,8 @@
     <h2 id="remove">掲載の削除・修正のお願い</h2>
     <p>このページに載った感想を、消してほしい、直してほしいときは、次のフォームから、お知らせください。確認して、対応します。(送られた内容と、送信に使われた通信の情報は、運営者だけが見られます)<br>
     <a href="contact.html?reason=delete">お問い合わせ</a>からでも、同じように受け付けています。</p>
-    <form class="form-box" name="remove-request" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+    <form class="form-box" name="remove-request" method="POST" action="/thanks.html" data-netlify="true">
       <input type="hidden" name="form-name" value="remove-request">
-      <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
       <div class="field">
         <label class="label required" for="target">どの感想ですか?</label>
         <input type="text" id="target" name="target" maxlength="100" required placeholder="例: 9月26日の公演の感想(送った日時が分かると助かります)">
@@ -260,6 +257,7 @@
   <script src="data/voices.js"></script>
   <script src="report.js"></script>
   <script src="report-form.js"></script>
+  <script src="form-submit.js"></script>
   <script src="vote.js"></script>
 </body>
 </html>

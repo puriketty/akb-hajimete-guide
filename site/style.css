@@ -770,6 +770,14 @@ button {
 }
 .ok-box { background: #eefaf1; border: 2px solid #b6e3c1; }
 .warn-box { background: #fff1f1; border: 2px solid #f4b6bd; }
+
+/* フォーム送信の結果(form-submit.js) */
+.form-result { margin: 16px 0; padding: 16px; border-radius: var(--radius); font-size: 1rem; }
+.form-success { background: #eefaf1; border: 2px solid #b6e3c1; }
+.form-error { background: #fff1f1; border: 2px solid #f4b6bd; }
+.form-result-title { margin: 0; font-weight: 700; font-size: 1.1rem; }
+.field-error { margin: 4px 0 0; color: #c0392b; font-size: 0.85rem; }
+[aria-invalid="true"] { border-color: #c0392b !important; }
 .warn-box button {
   margin-top: 6px;
   padding: 4px 14px;
