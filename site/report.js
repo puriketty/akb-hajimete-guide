@@ -1,7 +1,7 @@
 // ============================================================
 // 「ライブレポ・みんなの声」: 感想の表示
 // 感想のデータは data/voices.js にあります。公演ごとにまとめて、現地と配信の両方を表示します。
-// 「現地・配信」と、「現地ライブ初参加・ファン歴・出戻り」で、絞り込みもできます。
+// 「現地・配信」と、「ファン歴」で、絞り込みもできます。表示名は、全員「匿名」です。
 // ============================================================
 
 "use strict";
@@ -16,13 +16,6 @@ const SHOWS = [
 // 見た方法(フォームと同じ文字列にする)
 const STYLES = ["現地", "配信"];
 
-// 現地ライブへの参加経験(フォームと同じ文字列にする。現地で見た人だけが答える)
-const FIRST_LIVE_FIRST = "今回が初めて";
-const FIRST_LIVE_REPEAT = "参加経験あり";
-
-// 誰と行ったか(フォームと同じ文字列にする。任意)
-const COMPANIONS = ["ひとり", "友達と", "家族と"];
-
 // ファン歴の選択肢(フォームと同じ文字列にする)
 const FAN_YEARS = ["1年未満", "1年以上3年未満", "3年以上10年未満", "10年以上"];
 
@@ -32,7 +25,7 @@ const whoFilterBox = document.getElementById("voices-filter");
 
 // いま選ばれている絞り込み
 // 見た方法: "all" / "現地" / "配信"
-// どんな人: "all" / "first"(現地ライブ初参加) / "solo"(ひとり参加・視聴) / "repeat"(現地参加経験あり) / "years:ファン歴" / "returned"(出戻り)
+// ファン歴: "all" / "years:ファン歴"
 let styleFilter = "all";
 let whoFilter = "all";
 
@@ -46,21 +39,12 @@ function el(tag, className, text) {
 
 // 感想のデータを、表示用にそろえる。
 // 意味が確認できない項目は「未回答」として扱う(本文は、そのまま残す)。
-// 古い形式の history(「AKB歴」。「今回が初めて」は、ファン歴なのか現地初参加なのか区別できない)は、読まない。
 function normalize(v) {
   const style = STYLES.indexOf(v.style) >= 0 ? v.style : "";
   return {
     show: v.show,
     style: style,
-    // 配信の感想には、現地ライブの参加経験は、ない(あっても表示しない)
-    firstLive:
-      style === "現地" && (v.firstLive === FIRST_LIVE_FIRST || v.firstLive === FIRST_LIVE_REPEAT)
-        ? v.firstLive
-        : "",
-    companion: COMPANIONS.indexOf(v.companion) >= 0 ? v.companion : "",
     fanYears: FAN_YEARS.indexOf(v.fanYears) >= 0 ? v.fanYears : "",
-    returned: v.returned === true,
-    nickname: v.nickname,
     text: v.text,
     advice: typeof v.advice === "string" && v.advice.trim() ? v.advice.trim() : "",
     spoiler: v.spoiler === true,
@@ -76,10 +60,6 @@ function matchesStyle(v, filter) {
 
 function matchesWho(v, filter) {
   if (filter === "all") return true;
-  if (filter === "first") return v.firstLive === FIRST_LIVE_FIRST;
-  if (filter === "solo") return v.companion === "ひとり";
-  if (filter === "repeat") return v.firstLive === FIRST_LIVE_REPEAT;
-  if (filter === "returned") return v.returned;
   if (filter.indexOf("years:") === 0) return v.fanYears === filter.slice(6);
   return false;
 }
@@ -112,18 +92,11 @@ const STYLE_OPTIONS = [{ id: "all", label: "すべて" }].concat(
   })
 );
 
-const WHO_OPTIONS = [
-  { id: "all", label: "すべて" },
-  { id: "first", label: "現地ライブ初参加", primary: true },
-  { id: "solo", label: "ひとり参加・視聴", primary: true },
-  { id: "repeat", label: "現地参加経験あり" }
-]
-  .concat(
-    FAN_YEARS.map(function (y) {
-      return { id: "years:" + y, label: "ファン歴 " + y };
-    })
-  )
-  .concat([{ id: "returned", label: "出戻り" }]);
+const WHO_OPTIONS = [{ id: "all", label: "すべて" }].concat(
+  FAN_YEARS.map(function (y) {
+    return { id: "years:" + y, label: "ファン歴 " + y };
+  })
+);
 
 function renderFilters() {
   const hasAny = ALL_VOICES.length > 0;
@@ -163,23 +136,13 @@ function renderFilters() {
 // 感想のカード1件
 function renderCard(v) {
   const card = el("div", "voice");
-  const who = (v.nickname && v.nickname.trim()) || "匿名";
-  card.appendChild(el("p", "who", who + (v.date ? "(" + v.date + ")" : "")));
+  card.appendChild(el("p", "who", "匿名" + (v.date ? "(" + v.date + ")" : "")));
 
-  // ラベル(現地・配信 / 現地ライブ初参加 / ファン歴 / 出戻り)
+  // ラベル(現地・配信 / ファン歴)
   const badges = el("div", "badges");
   if (v.style === "現地") badges.appendChild(el("span", "badge onsite", "現地"));
   if (v.style === "配信") badges.appendChild(el("span", "badge stream", "配信"));
-  if (v.firstLive === FIRST_LIVE_FIRST) badges.appendChild(el("span", "badge first", "現地ライブ初参加"));
-  if (v.firstLive === FIRST_LIVE_REPEAT) badges.appendChild(el("span", "badge", "現地参加経験あり"));
-  if (v.companion) {
-    // 現地は「参加」、配信は「視聴」と表示する
-    const verb = v.style === "配信" ? "視聴" : "参加";
-    const text = v.companion === "ひとり" ? "ひとり" + verb : v.companion + verb;
-    badges.appendChild(el("span", "badge", text));
-  }
   if (v.fanYears) badges.appendChild(el("span", "badge", "ファン歴 " + v.fanYears));
-  if (v.returned) badges.appendChild(el("span", "badge return", "出戻り"));
   if (badges.children.length > 0) card.appendChild(badges);
 
   if (v.advice) {
@@ -241,13 +204,4 @@ function render() {
   }
 }
 
-// URLが「#first」のときは、最初から「現地ライブ初参加」で絞り込んで表示する
-// (「初参加者の声まとめ」への直接リンク用。例: report.html#first)
-if (location.hash === "#first") {
-  whoFilter = "first";
-}
 render();
-if (location.hash === "#first") {
-  const heading = document.getElementById("voices");
-  if (heading) heading.scrollIntoView();
-}
