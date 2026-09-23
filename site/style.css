@@ -592,6 +592,18 @@ textarea { resize: vertical; }
 .hometown-region li.muted .hometown-pref { font-weight: 400; }
 .hometown-member a { font-weight: 700; }
 
+/* 運営者紹介(about.html) */
+.operator-block { display: flex; align-items: center; gap: 12px; margin: 28px 0 4px; }
+.operator-block h3 { margin: 0; }
+.operator-avatar {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--pink-light);
+  border: 2px dashed var(--pink-soft);
+}
+
 .checklist { list-style: none; padding: 0; margin: 10px 0; }
 .checklist li { margin: 6px 0; }
 .checklist label {
@@ -877,6 +889,7 @@ button {
 
 /* 運営者の体験のラベル */
 .ex.owner { background: #fff0f6; border-color: #f3c0d6; color: #a12a5e; }
+.ex.owner a { color: inherit; text-decoration: underline; }
 /* ===== トップの「今週末はライブ」帯(日付で自動切り替え) ===== */
 .week-banner {
   margin: 0 0 20px;
