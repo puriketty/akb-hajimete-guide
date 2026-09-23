@@ -1,33 +1,27 @@
 // ============================================================
 // 「ライブレポ・みんなの声」: 感想の表示
-// 感想のデータは data/voices.js にあります。公演ごとにまとめて、現地と配信の両方を表示します。
-// 「現地・配信」と、「ファン歴」で、絞り込みもできます。表示名は、全員「匿名」です。
+// 感想のデータは data/voices.js にあります。公演ごとのタブ(すべて/9月26日昼/9月26日夜/9月27日)で切り替えます。
+// 選んだタブは、URLの ?show= に残ります(例: report.html?show=926n)。そのURLを開くと、そのタブが選ばれた状態で開きます。
+// 表示名は、全員「匿名」です。「現地・配信」の絞り込みは、今回は作っていません(ラベルとしては表示します)。
 // ============================================================
 
 "use strict";
 
-// 公演の一覧(id は data/voices.js の show と同じにする)
+// 公演の一覧(id は data/voices.js の show と同じにする。tab は URL の ?show= と、タブのボタンに使う)
 const SHOWS = [
-  { id: "0926-1230", label: "9月26日(土)12:30 新曲「好きish」コンサート" },
-  { id: "0926-1830", label: "9月26日(土)18:30 全員「好きish」コンサート" },
-  { id: "0927-1600", label: "9月27日(日)16:00 推しが「好きish」コンサート" }
+  { id: "0926-1230", tab: "926n", tabLabel: "9月26日 昼", label: "9月26日(土)12:30 新曲「好きish」コンサート" },
+  { id: "0926-1830", tab: "926y", tabLabel: "9月26日 夜", label: "9月26日(土)18:30 全員「好きish」コンサート" },
+  { id: "0927-1600", tab: "927", tabLabel: "9月27日", label: "9月27日(日)16:00 推しが「好きish」コンサート" }
 ];
 
-// 見た方法(フォームと同じ文字列にする)
+// 見た方法(フォームと同じ文字列にする。ラベル表示だけに使い、絞り込みには使わない)
 const STYLES = ["現地", "配信"];
 
 // ファン歴の選択肢(フォームと同じ文字列にする)
 const FAN_YEARS = ["1年未満", "1年以上3年未満", "3年以上10年未満", "10年以上"];
 
 const listBox = document.getElementById("voices-list");
-const styleFilterBox = document.getElementById("voices-filter-style");
-const whoFilterBox = document.getElementById("voices-filter");
-
-// いま選ばれている絞り込み
-// 見た方法: "all" / "現地" / "配信"
-// ファン歴: "all" / "years:ファン歴"
-let styleFilter = "all";
-let whoFilter = "all";
+const tabsBox = document.getElementById("voices-tabs");
 
 // HTMLの部品(タグ)をつくる便利な関数(文章は textContent で入れるので、安全)
 function el(tag, className, text) {
@@ -45,6 +39,7 @@ function normalize(v) {
     show: v.show,
     style: style,
     fanYears: FAN_YEARS.indexOf(v.fanYears) >= 0 ? v.fanYears : "",
+    returned: v.returned === true,
     text: v.text,
     advice: typeof v.advice === "string" && v.advice.trim() ? v.advice.trim() : "",
     spoiler: v.spoiler === true,
@@ -54,95 +49,73 @@ function normalize(v) {
 
 const ALL_VOICES = VOICES.map(normalize);
 
-function matchesStyle(v, filter) {
-  return filter === "all" || v.style === filter;
-}
-
-function matchesWho(v, filter) {
-  if (filter === "all") return true;
-  if (filter.indexOf("years:") === 0) return v.fanYears === filter.slice(6);
-  return false;
-}
-
-function countOf(styleF, whoF) {
+function voicesForShow(showId) {
   return ALL_VOICES.filter(function (v) {
-    return matchesStyle(v, styleF) && matchesWho(v, whoF);
-  }).length;
-}
-
-// 絞り込みのボタンを1行分つくる(人数つき。0人の項目は、選ばれていなければ出さない)
-function renderChips(box, options, current, countFor, onPick, keepZero) {
-  box.replaceChildren();
-  options.forEach(function (opt) {
-    const count = countFor(opt.id);
-    if (!keepZero && opt.id !== "all" && count === 0 && current !== opt.id) return;
-    const button = el("button", opt.primary ? "primary" : "", opt.label + "(" + count + ")");
-    button.type = "button";
-    button.setAttribute("aria-pressed", String(current === opt.id));
-    button.addEventListener("click", function () {
-      onPick(opt.id);
-    });
-    box.appendChild(button);
+    return v.show === showId;
   });
 }
 
-const STYLE_OPTIONS = [{ id: "all", label: "すべて" }].concat(
-  STYLES.map(function (s) {
-    return { id: s, label: s };
-  })
-);
-
-const WHO_OPTIONS = [{ id: "all", label: "すべて" }].concat(
-  FAN_YEARS.map(function (y) {
-    return { id: "years:" + y, label: "ファン歴 " + y };
-  })
-);
-
-function renderFilters() {
-  const hasAny = ALL_VOICES.length > 0;
-  styleFilterBox.parentNode.hidden = !hasAny;
-  whoFilterBox.parentNode.hidden = !hasAny;
-  if (!hasAny) return;
-
-  renderChips(
-    styleFilterBox,
-    STYLE_OPTIONS,
-    styleFilter,
-    function (id) {
-      return countOf(id, whoFilter);
-    },
-    function (id) {
-      styleFilter = id;
-      // 配信の感想には、現地ライブの参加経験がないので、その絞り込みは外す
-      if (id === "配信" && (whoFilter === "first" || whoFilter === "repeat")) whoFilter = "all";
-      render();
-    },
-    true // 「現地」「配信」のボタンは、0件でも消さない(切り替えられるように)
-  );
-  renderChips(
-    whoFilterBox,
-    WHO_OPTIONS,
-    whoFilter,
-    function (id) {
-      return countOf(styleFilter, id);
-    },
-    function (id) {
-      whoFilter = id;
-      render();
-    }
-  );
+// URLの ?show= から、いま選ぶべきタブを読む(知らない値・なければ "all")
+function tabFromUrl() {
+  try {
+    const value = new URLSearchParams(location.search).get("show");
+    if (value && SHOWS.some(function (s) { return s.tab === value; })) return value;
+  } catch (e) {
+    // URLSearchParamsが使えない環境でも、動作は止めない(常に「すべて」になるだけ)
+  }
+  return "all";
 }
 
-// 感想のカード1件
+let currentTab = tabFromUrl();
+
+// タブを選んだら、URLにも残す(ページの再読み込みはしない)
+function selectTab(tab) {
+  currentTab = tab;
+  try {
+    const params = new URLSearchParams(location.search);
+    if (tab === "all") params.delete("show");
+    else params.set("show", tab);
+    const query = params.toString();
+    history.replaceState(null, "", location.pathname + (query ? "?" + query : "") + location.hash);
+  } catch (e) {
+    // URLに残せなくても、表示の切り替え自体は行う
+  }
+  render();
+}
+
+function renderTabs() {
+  tabsBox.replaceChildren();
+  const options = [{ tab: "all", label: "すべて" }].concat(
+    SHOWS.map(function (s) {
+      return { tab: s.tab, label: s.tabLabel };
+    })
+  );
+  options.forEach(function (opt) {
+    const count =
+      opt.tab === "all"
+        ? ALL_VOICES.length
+        : voicesForShow(SHOWS.filter(function (s) { return s.tab === opt.tab; })[0].id).length;
+    const button = el("button", "", opt.label + "(" + count + ")");
+    button.type = "button";
+    button.setAttribute("aria-pressed", String(currentTab === opt.tab));
+    button.addEventListener("click", function () {
+      selectTab(opt.tab);
+    });
+    tabsBox.appendChild(button);
+  });
+}
+
+// 感想のカード1件(表示名は、全員「匿名」)
 function renderCard(v) {
   const card = el("div", "voice");
   card.appendChild(el("p", "who", "匿名" + (v.date ? "(" + v.date + ")" : "")));
 
-  // ラベル(現地・配信 / ファン歴)
+  // ラベル(現地・配信 / ファン歴 / 出戻り)
   const badges = el("div", "badges");
   if (v.style === "現地") badges.appendChild(el("span", "badge onsite", "現地"));
   if (v.style === "配信") badges.appendChild(el("span", "badge stream", "配信"));
   if (v.fanYears) badges.appendChild(el("span", "badge", "ファン歴 " + v.fanYears));
+  if (v.returned) badges.appendChild(el("span", "badge return", "出戻り"));
   if (badges.children.length > 0) card.appendChild(badges);
 
   if (v.advice) {
@@ -170,19 +143,27 @@ const STYLE_GROUPS = [
   { style: "", label: "見た方法の回答がない感想" }
 ];
 
+// 0件のときに出す、「最初の1人になりませんか?」の案内
+function renderEmpty() {
+  listBox.appendChild(el("p", "pending", "まだ感想がありません。最初の1人になりませんか?"));
+  const link = el("a", "submit-button", "感想を送る");
+  link.href = "#post";
+  listBox.appendChild(link);
+}
+
 function render() {
-  renderFilters();
+  renderTabs();
   listBox.replaceChildren();
+
+  const shows = currentTab === "all" ? SHOWS : SHOWS.filter(function (s) { return s.tab === currentTab; });
   let total = 0;
 
-  SHOWS.forEach(function (show) {
-    const inShow = ALL_VOICES.filter(function (v) {
-      return v.show === show.id && matchesStyle(v, styleFilter) && matchesWho(v, whoFilter);
-    });
+  shows.forEach(function (show) {
+    const inShow = voicesForShow(show.id);
     if (inShow.length === 0) return;
     total += inShow.length;
 
-    listBox.appendChild(el("h3", "", show.label));
+    if (currentTab === "all") listBox.appendChild(el("h3", "", show.label));
     STYLE_GROUPS.forEach(function (group) {
       const list = inShow.filter(function (v) {
         return v.style === group.style;
@@ -195,13 +176,7 @@ function render() {
     });
   });
 
-  if (total === 0) {
-    const message =
-      ALL_VOICES.length === 0
-        ? "まだ感想はありません。公演のあとに、行った人の声を、ここに載せていきます。"
-        : "この条件に合う感想は、まだありません。";
-    listBox.appendChild(el("p", "pending", message));
-  }
+  if (total === 0) renderEmpty();
 }
 
 render();

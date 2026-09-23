@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="analytics.js"></script>
+  <title>AKB48 出身地から探す|都道府県別メンバー一覧(公式プロフィールより・2026年9月確認)</title>
+  <meta name="description" content="AKB48全メンバー45名の出身地を、都道府県・地方ごとにまとめました。自分の出身地を選ぶと、地元のメンバーが探せます。出典はすべて公式プロフィールです。(非公式ファンサイト)">
+  <link rel="canonical" href="https://akb-hajimete-guide.netlify.app/hometown.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="初めてのAKB48ガイド">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="AKB48 出身地から探す|都道府県別メンバー一覧">
+  <meta property="og:description" content="全メンバー45名の出身地を、都道府県・地方ごとにまとめました。自分の出身地を選ぶと、地元のメンバーが探せます。">
+  <meta property="og:url" content="https://akb-hajimete-guide.netlify.app/hometown.html">
+  <meta property="og:image" content="https://akb-hajimete-guide.netlify.app/ogp.png">
+  <meta property="og:image:alt" content="初めてのAKB48ガイド(非公式ファンサイト)">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-live">
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-name" href="index.html">初めてのAKB48ガイド</a>
+      <nav class="site-nav">
+        <a href="live.html">ライブ</a>
+        <a href="handshakes.html">握手会</a>
+        <a href="theater.html">劇場公演</a>
+        <a href="apply.html">申し込み</a>
+        <a href="report.html">みんなの声</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="hero-emoji" aria-hidden="true">🗾</span>
+      <p class="hero-title">地元のメンバーを探す</p>
+      <p class="hero-sub">出身地から探す(全メンバー45名)</p>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <h1>出身地から探す</h1>
+    <p class="updated">確認日: <span id="checked-at"></span></p>
+
+    <div class="notice">
+      全メンバー45名の出身地を、<a href="https://www.akb48.co.jp/about/members/" target="_blank" rel="noopener">AKB48公式サイトのメンバープロフィール</a>から、1人ずつ確認しました。<strong>写真は載せていません</strong>(メンバー名を押すと、公式プロフィールが開きます)。<br>
+      出身地は、<strong>卒業・加入で変わります。</strong>この一覧は、確認した時点のものです。
+    </div>
+
+    <h2>自分の出身地を選ぶ</h2>
+    <p>
+      <label for="pref-select">都道府県:</label>
+      <select id="pref-select"></select>
+    </p>
+    <div id="pref-result" class="hometown-result" hidden></div>
+
+    <h2>地方ごとの一覧</h2>
+    <p class="hint">都道府県名の横の人数は、現メンバーの人数です。0人の県も、参考のために載せています。</p>
+    <div id="regions-list"></div>
+
+    <h2>このデータから言えること</h2>
+    <ul>
+      <li>一番多いのは<strong>埼玉県(8人)</strong>、次いで<strong>東京都(7人)</strong>、<strong>神奈川県(5人)</strong>です。</li>
+      <li><strong>北海道が4人</strong>と、関東以外では最多です。</li>
+      <li>関東(1都3県)で<strong>22人</strong>と、全体の約半数を占めます。</li>
+      <li>チーム8出身のメンバーは、富山県・福井県・鳥取県・山口県・香川県・熊本県など、<strong>地方の県に広がっています。</strong></li>
+    </ul>
+    <p class="summary-scope">出典: <a href="https://www.akb48.co.jp/about/members/" target="_blank" rel="noopener">AKB48公式サイト メンバープロフィール</a>(各メンバーの詳細ページを個別に確認、2026年9月23日)。ペンライトカラーは、<a href="penlight.html">ペンライトカラー一覧</a>を見てください。</p>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>非公式ファンサイト / <a href="index.html">トップへ戻る</a> / <a href="past.html">過去の公演</a> / <a href="about.html">このサイトについて</a></p>
+    </div>
+  </footer>
+
+  <script src="data/hometown.js"></script>
+  <script src="hometown.js"></script>
+</body>
+</html>

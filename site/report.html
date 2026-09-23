@@ -90,12 +90,8 @@
     <h2 id="voices">行った人の声</h2>
     <p class="hint">感想は、公演ごとに、現地・配信の両方を載せています。「現地」「配信」のラベルで、見分けられます。</p>
     <div class="filter-group">
-      <p class="filter-title">見た方法</p>
-      <div id="voices-filter-style" class="filter-chips" aria-label="現地・配信で絞り込む"></div>
-    </div>
-    <div class="filter-group">
-      <p class="filter-title">ファン歴</p>
-      <div id="voices-filter" class="filter-chips" aria-label="ファン歴で絞り込む"></div>
+      <p class="filter-title">公演で選ぶ</p>
+      <div id="voices-tabs" class="filter-chips" aria-label="公演で切り替える"></div>
     </div>
     <div id="voices-list"></div>
 
@@ -130,6 +126,9 @@
           <label><input type="radio" name="fan_years" value="1年以上3年未満" required> 1年以上3年未満</label>
           <label><input type="radio" name="fan_years" value="3年以上10年未満" required> 3年以上10年未満</label>
           <label><input type="radio" name="fan_years" value="10年以上" required> 10年以上</label>
+        </div>
+        <div class="checks">
+          <label><input type="checkbox" name="returned" value="yes"> 一度離れて、<strong>戻ってきた</strong>(出戻り)</label>
         </div>
         <span class="hint">感想に、ラベルとして表示されます。</span>
       </div>
@@ -186,12 +185,12 @@
 
       <div class="field">
         <div class="checks">
-          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。感想・見た公演・現地か配信か・アドバイス・ファン歴のラベル・ネタバレの有無を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます。表示名は「匿名」になります)</label>
+          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベル・ネタバレの有無を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます。表示名は「匿名」になります)</label>
         </div>
       </div>
 
       <button type="submit" class="submit-button">送信する</button>
-      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想・見た公演・現地か配信か・アドバイス・ファン歴のラベル・ネタバレの有無だけです(表示名は「匿名」)。年代・性別は、全体の割合の集計にだけ使い、投稿ごとには載せません。</p>
+      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベル・ネタバレの有無だけです(表示名は「匿名」)。年代・性別は、全体の割合の集計にだけ使い、投稿ごとには載せません。</p>
     </form>
 
     <h2 id="rules">掲載のルール</h2>
@@ -207,7 +206,7 @@
         </ul>
       </li>
       <li>運営者が読んで、<strong>載せるものを選びます。すべてが載るわけではありません。</strong>意味が変わらない範囲で、誤字を直したり、長い文章を短くしたりすることがあります。</li>
-      <li>載せるのは、<strong>感想、見た公演、現地か配信か、アドバイス、ファン歴のラベル、ネタバレの有無</strong>だけです。表示名は、全員「匿名」になります。答えなかった項目は、載りません。「年代」「性別」は、感想と一緒には載せません(全体の割合の集計にだけ使います)。</li>
+      <li>載せるのは、<strong>感想、見た公演、現地か配信か、アドバイス、ファン歴・出戻りのラベル、ネタバレの有無</strong>だけです。表示名は、全員「匿名」になります。答えなかった項目は、載りません。「年代」「性別」は、感想と一緒には載せません(全体の割合の集計にだけ使います)。</li>
       <li>ネタバレを含む感想は、「ネタバレを含む」にチェックが入っていて、押すまで読めない形で載せます。</li>
     </ul>
 
