@@ -49,4 +49,5 @@
 // ============================================================
 
 const VOICES = [
+  { id: 1, show: "0926-1230", place: "現地", years: "3年以上10年未満", text: "テスト", advice: "テスト", age: "20代", gender: "男性", published: "2026-09-23", test: true, returned: true, spoiler: true }
 ];
