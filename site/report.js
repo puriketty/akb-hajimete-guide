@@ -3,6 +3,9 @@
 // 感想のデータは data/voices.js にあります。公演ごとのタブ(すべて/9月26日昼/9月26日夜/9月27日)で切り替えます。
 // 選んだタブは、URLの ?show= に残ります(例: report.html?show=926n)。そのURLを開くと、そのタブが選ばれた状態で開きます。
 // 表示名は、全員「匿名」です。「現地・配信」の絞り込みは、今回は作っていません(ラベルとしては表示します)。
+//
+// test: true の投稿は、本番(akb-hajimete-guide.netlify.app)では表示しない
+// (プレビュー・ローカルでは表示する。テスト投稿が本番に出てしまうのを防ぐため)。
 // ============================================================
 
 "use strict";
@@ -15,10 +18,13 @@ const SHOWS = [
 ];
 
 // 見た方法(フォームと同じ文字列にする。ラベル表示だけに使い、絞り込みには使わない)
-const STYLES = ["現地", "配信"];
+const PLACES = ["現地", "配信"];
 
 // ファン歴の選択肢(フォームと同じ文字列にする)
-const FAN_YEARS = ["1年未満", "1年以上3年未満", "3年以上10年未満", "10年以上"];
+const YEARS = ["1年未満", "1年以上3年未満", "3年以上10年未満", "10年以上"];
+
+// 本番かどうか(本番ドメインのときだけ true)
+const IS_PRODUCTION = location.hostname === "akb-hajimete-guide.netlify.app";
 
 const listBox = document.getElementById("voices-list");
 const tabsBox = document.getElementById("voices-tabs");
@@ -33,21 +39,26 @@ function el(tag, className, text) {
 
 // 感想のデータを、表示用にそろえる。
 // 意味が確認できない項目は「未回答」として扱う(本文は、そのまま残す)。
+// age(年代)・gender(性別)は、集計専用のため、ここでは読み込まない(表示に使わない)。
 function normalize(v) {
-  const style = STYLES.indexOf(v.style) >= 0 ? v.style : "";
+  const place = PLACES.indexOf(v.place) >= 0 ? v.place : "";
   return {
+    id: v.id,
     show: v.show,
-    style: style,
-    fanYears: FAN_YEARS.indexOf(v.fanYears) >= 0 ? v.fanYears : "",
+    place: place,
+    years: YEARS.indexOf(v.years) >= 0 ? v.years : "",
     returned: v.returned === true,
     text: v.text,
     advice: typeof v.advice === "string" && v.advice.trim() ? v.advice.trim() : "",
     spoiler: v.spoiler === true,
-    date: v.date
+    published: v.published,
+    test: v.test === true
   };
 }
 
-const ALL_VOICES = VOICES.map(normalize);
+const ALL_VOICES = VOICES.map(normalize).filter(function (v) {
+  return !(IS_PRODUCTION && v.test);
+});
 
 function voicesForShow(showId) {
   return ALL_VOICES.filter(function (v) {
@@ -108,13 +119,15 @@ function renderTabs() {
 // 感想のカード1件(表示名は、全員「匿名」)
 function renderCard(v) {
   const card = el("div", "voice");
-  card.appendChild(el("p", "who", "匿名" + (v.date ? "(" + v.date + ")" : "")));
+  if (v.test) card.classList.add("voice-test");
+  const who = "匿名" + (v.published ? "(" + v.published + ")" : "") + (v.test ? "(テスト投稿)" : "");
+  card.appendChild(el("p", "who", who));
 
   // ラベル(現地・配信 / ファン歴 / 出戻り)
   const badges = el("div", "badges");
-  if (v.style === "現地") badges.appendChild(el("span", "badge onsite", "現地"));
-  if (v.style === "配信") badges.appendChild(el("span", "badge stream", "配信"));
-  if (v.fanYears) badges.appendChild(el("span", "badge", "ファン歴 " + v.fanYears));
+  if (v.place === "現地") badges.appendChild(el("span", "badge onsite", "現地"));
+  if (v.place === "配信") badges.appendChild(el("span", "badge stream", "配信"));
+  if (v.years) badges.appendChild(el("span", "badge", "ファン歴 " + v.years));
   if (v.returned) badges.appendChild(el("span", "badge return", "出戻り"));
   if (badges.children.length > 0) card.appendChild(badges);
 
@@ -137,10 +150,10 @@ function renderCard(v) {
 }
 
 // 公演ごとの中の、見た方法ごとの区切り
-const STYLE_GROUPS = [
-  { style: "現地", label: "現地で見た人の感想" },
-  { style: "配信", label: "配信で見た人の感想" },
-  { style: "", label: "見た方法の回答がない感想" }
+const PLACE_GROUPS = [
+  { place: "現地", label: "現地で見た人の感想" },
+  { place: "配信", label: "配信で見た人の感想" },
+  { place: "", label: "見た方法の回答がない感想" }
 ];
 
 // 0件のときに出す、「最初の1人になりませんか?」の案内
@@ -164,9 +177,9 @@ function render() {
     total += inShow.length;
 
     if (currentTab === "all") listBox.appendChild(el("h3", "", show.label));
-    STYLE_GROUPS.forEach(function (group) {
+    PLACE_GROUPS.forEach(function (group) {
       const list = inShow.filter(function (v) {
-        return v.style === group.style;
+        return v.place === group.place;
       });
       if (list.length === 0) return;
       listBox.appendChild(el("h4", "", group.label + "(" + list.length + ")"));

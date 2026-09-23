@@ -327,6 +327,7 @@ textarea { resize: vertical; }
   border-radius: var(--radius);
 }
 .voice .who { margin: 0; font-weight: 700; color: var(--pink-deep); }
+.voice.voice-test { border-style: dashed; background: #fff8e6; }
 .voice .body { margin: 4px 0 0; white-space: pre-wrap; }
 .voice .advice {
   margin: 6px 0 0;
