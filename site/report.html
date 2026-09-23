@@ -48,8 +48,7 @@
 
     <div class="notice">
       公演に行った人の感想を、集めて載せていくページです。公演は9月26日・27日で、感想は<strong>公演のあと</strong>に送ってください。<br>
-      ここに載るのは、行った人の<strong>個人の感想</strong>です。公式の情報ではありません。セットリストなどの確かな情報は、確定したものだけを、<a href="live.html#setlist">ライブ情報のページ</a>に載せます。<br>
-      <strong>ネタバレを含む感想があります。</strong>まだ見ていない人は、気をつけてください。
+      ここに載るのは、行った人の<strong>個人の感想</strong>です。公式の情報ではありません。セットリストなどの確かな情報は、確定したものだけを、<a href="live.html#setlist">ライブ情報のページ</a>に載せます。
     </div>
     <p><a href="contact.html?reason=delete">投稿の削除をお願いしたい方はこちら</a></p>
 
@@ -71,9 +70,8 @@
     <h2 id="vote">お楽しみ投票:もう一度見たいのはどの公演?</h2>
     <div id="vote-widget" hidden>
       <p class="hint">お楽しみ投票です。1人1票でお願いします。現地・配信、どちらで見た人も投票できます。結果は、投票の受付が終わったあとに発表します。</p>
-      <form id="vote-form" class="form-box" name="vote" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+      <form id="vote-form" class="form-box" name="vote" method="POST" action="/thanks.html" data-netlify="true">
         <input type="hidden" name="form-name" value="vote">
-        <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
         <div class="field" role="radiogroup" aria-labelledby="q-vote-show">
           <span class="label required" id="q-vote-show">もう一度見たいのは、どの公演?</span>
           <div class="checks">
@@ -99,9 +97,8 @@
     <h2 id="post">感想を送る</h2>
     <p>行った公演の感想を、送ってください。初めて行った人の感想も、長く応援している人の感想も、歓迎です。配信で見た人の感想も、歓迎です。<a href="#rules">掲載のルール</a>を、先に読んでください。</p>
     <p><strong>1回の送信で書けるのは、1公演分の感想です。</strong>複数の公演について書きたいときは、公演ごとに、分けて送ってください。</p>
-    <form id="voice-form" class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+    <form id="voice-form" class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true">
       <input type="hidden" name="form-name" value="voice">
-      <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
 
       <div class="field" role="radiogroup" aria-labelledby="q-show">
         <span class="label required" id="q-show">どの公演の感想ですか?</span>
@@ -123,15 +120,15 @@
       <div class="field" role="radiogroup" aria-labelledby="q-fan-years">
         <span class="label required" id="q-fan-years">ファン歴</span>
         <div class="checks">
-          <label><input type="radio" name="fan_years" value="1年未満" required> 1年未満</label>
-          <label><input type="radio" name="fan_years" value="1年以上3年未満" required> 1年以上3年未満</label>
-          <label><input type="radio" name="fan_years" value="3年以上10年未満" required> 3年以上10年未満</label>
-          <label><input type="radio" name="fan_years" value="10年以上" required> 10年以上</label>
+          <label><input type="radio" name="fan_years" value="1年未満"> 1年未満</label>
+          <label><input type="radio" name="fan_years" value="1年以上3年未満"> 1年以上3年未満</label>
+          <label><input type="radio" name="fan_years" value="3年以上10年未満"> 3年以上10年未満</label>
+          <label><input type="radio" name="fan_years" value="10年以上"> 10年以上</label>
         </div>
         <div class="checks">
           <label><input type="checkbox" name="returned" value="yes"> 一度離れて、<strong>戻ってきた</strong>(出戻り)</label>
         </div>
-        <span class="hint">感想に、ラベルとして表示されます。</span>
+        <span class="hint">年数か、「出戻り」か、どちらかを選んでください。感想に、ラベルとして表示されます。</span>
       </div>
 
       <div class="field">
@@ -180,18 +177,12 @@
 
       <div class="field">
         <div class="checks">
-          <label><input type="checkbox" name="spoiler" value="yes"> 曲目や演出など、<strong>ネタバレを含む</strong></label>
-        </div>
-      </div>
-
-      <div class="field">
-        <div class="checks">
-          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベル・ネタバレの有無を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます。表示名は「匿名」になります)</label>
+          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベルを、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます。表示名は「匿名」になります)</label>
         </div>
       </div>
 
       <button type="submit" class="submit-button">送信する</button>
-      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベル・ネタバレの有無だけです(表示名は「匿名」)。年代・性別は、全体の割合の集計にだけ使い、投稿ごとには載せません。</p>
+      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベルだけです(表示名は「匿名」)。年代・性別は、全体の割合の集計にだけ使い、投稿ごとには載せません。</p>
     </form>
 
     <h2 id="rules">掲載のルール</h2>
@@ -207,8 +198,7 @@
         </ul>
       </li>
       <li>運営者が読んで、<strong>載せるものを選びます。すべてが載るわけではありません。</strong>意味が変わらない範囲で、誤字を直したり、長い文章を短くしたりすることがあります。</li>
-      <li>載せるのは、<strong>感想、見た公演、現地か配信か、アドバイス、ファン歴・出戻りのラベル、ネタバレの有無</strong>だけです。表示名は、全員「匿名」になります。答えなかった項目は、載りません。「年代」「性別」は、感想と一緒には載せません(全体の割合の集計にだけ使います)。</li>
-      <li>ネタバレを含む感想は、「ネタバレを含む」にチェックが入っていて、押すまで読めない形で載せます。</li>
+      <li>載せるのは、<strong>感想、見た公演、現地か配信か、アドバイス、ファン歴・出戻りのラベル</strong>だけです。表示名は、全員「匿名」になります。答えなかった項目は、載りません。「年代」「性別」は、感想と一緒には載せません(全体の割合の集計にだけ使います)。</li>
     </ul>
 
     <h2 id="x">Xで、みんなの声を見る</h2>
@@ -235,9 +225,8 @@
     <h2 id="remove">掲載の削除・修正のお願い</h2>
     <p>このページに載った感想を、消してほしい、直してほしいときは、次のフォームから、お知らせください。確認して、対応します。(送られた内容と、送信に使われた通信の情報は、運営者だけが見られます)<br>
     <a href="contact.html?reason=delete">お問い合わせ</a>からでも、同じように受け付けています。</p>
-    <form class="form-box" name="remove-request" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+    <form class="form-box" name="remove-request" method="POST" action="/thanks.html" data-netlify="true">
       <input type="hidden" name="form-name" value="remove-request">
-      <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
       <div class="field">
         <label class="label required" for="target">どの感想ですか?</label>
         <input type="text" id="target" name="target" maxlength="100" required placeholder="例: 9月26日の公演の感想(送った日時が分かると助かります)">
@@ -260,6 +249,7 @@
   <script src="data/voices.js"></script>
   <script src="report.js"></script>
   <script src="report-form.js"></script>
+  <script src="form-submit.js"></script>
   <script src="vote.js"></script>
 </body>
 </html>

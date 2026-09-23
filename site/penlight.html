@@ -82,9 +82,8 @@
 
     <h2 id="correction">色の間違い・変更のお知らせ</h2>
     <p>「この人の色が、今は違う」「この色が抜けている」などに気づいたら、教えてください。</p>
-    <form class="form-box" name="correction" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+    <form class="form-box" name="correction" method="POST" action="/thanks.html" data-netlify="true">
       <input type="hidden" name="form-name" value="correction">
-      <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
       <div class="field">
         <label class="label required" for="c-member">メンバーの名前</label>
         <input type="text" id="c-member" name="member" maxlength="30" required placeholder="例: 〇〇〇〇">
@@ -111,5 +110,6 @@
 
   <script src="data/penlight.js"></script>
   <script src="penlight.js"></script>
+  <script src="form-submit.js"></script>
 </body>
 </html>

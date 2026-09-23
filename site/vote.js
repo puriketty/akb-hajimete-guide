@@ -88,8 +88,8 @@ function render() {
   }
 }
 
-// 送信(ページ遷移)の直前に、このブラウザで投票済みだと記録する
-voteForm.addEventListener("submit", function () {
+// 送信に成功したら(form-submit.jsがAJAXで送ったあと)、このブラウザで投票済みだと記録する
+voteForm.addEventListener("ajaxform:success", function () {
   markVoted();
 });
 
