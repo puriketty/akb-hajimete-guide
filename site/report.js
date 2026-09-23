@@ -50,7 +50,6 @@ function normalize(v) {
     returned: v.returned === true,
     text: v.text,
     advice: typeof v.advice === "string" && v.advice.trim() ? v.advice.trim() : "",
-    spoiler: v.spoiler === true,
     published: v.published,
     test: v.test === true
   };
@@ -138,14 +137,7 @@ function renderCard(v) {
     card.appendChild(advice);
   }
 
-  if (v.spoiler) {
-    const details = el("details");
-    details.appendChild(el("summary", "", "ネタバレを含みます(押すと読めます)"));
-    details.appendChild(el("p", "body", v.text));
-    card.appendChild(details);
-  } else {
-    card.appendChild(el("p", "body", v.text));
-  }
+  card.appendChild(el("p", "body", v.text));
   return card;
 }
 
