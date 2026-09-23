@@ -22,11 +22,6 @@ if (CAST && castCheck) {
   castCheck.addEventListener("change", render);
 }
 
-const SOURCE_LABEL = {
-  official2022: "公式の一覧(2022年10月)",
-  fan: "ファン有志の一覧を参考に確認"
-};
-
 // HTMLの部品(タグ)をつくる便利な関数(文章は textContent で入れるので、安全)
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -83,7 +78,7 @@ function render() {
   PENLIGHT.groups.forEach(function (group) {
     const members = PENLIGHT.members.filter(function (m) {
       if (m.group !== group) return false;
-      if (query && m.name.indexOf(query) === -1) return false;
+      if (query && m.name.indexOf(query) === -1 && (m.nickname || "").indexOf(query) === -1) return false;
       if (selectedColor && m.colors.indexOf(selectedColor) === -1) return false;
       if (CAST && castCheck && castCheck.checked && CAST.names.indexOf(m.name) === -1) return false;
       return true;
@@ -96,7 +91,7 @@ function render() {
       const item = el("div", "pl-item");
       const left = el("div", "pl-left");
       left.appendChild(el("span", "pl-name", m.name));
-      left.appendChild(el("span", "pl-src", SOURCE_LABEL[m.source] || ""));
+      if (m.nickname) left.appendChild(el("span", "pl-nickname", m.nickname));
       item.appendChild(left);
 
       const chips = el("div", "pl-chips");

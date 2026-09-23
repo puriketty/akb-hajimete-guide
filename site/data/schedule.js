@@ -53,8 +53,7 @@ const SCHEDULE = [
     summary: "3つのコンセプトの全3公演(9/26 12:30・9/26 18:30・9/27 16:00)。",
     guide: { label: "公演の概要・チケット・入場のルール", href: "live.html#three" },
     extra: [
-      { label: "会場ガイド(Kアリーナ横浜の行き方・宿泊)", href: "venues.html#k-arena" },
-      { label: "初参加者の声まとめ", href: "report.html#first" }
+      { label: "会場ガイド(Kアリーナ横浜の行き方・宿泊)", href: "venues.html#k-arena" }
     ],
     setlist: { href: "live.html#setlist", published: false },
     voices: { href: "report.html#voices" },

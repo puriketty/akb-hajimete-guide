@@ -51,12 +51,14 @@
       ここに載るのは、行った人の<strong>個人の感想</strong>です。公式の情報ではありません。セットリストなどの確かな情報は、確定したものだけを、<a href="live.html#setlist">ライブ情報のページ</a>に載せます。<br>
       <strong>ネタバレを含む感想があります。</strong>まだ見ていない人は、気をつけてください。
     </div>
+    <p><a href="contact.html?reason=delete">投稿の削除をお願いしたい方はこちら</a></p>
 
     <p><a class="share-button" href="https://x.com/intent/post?text=AKB48%20THREE%20CONCEPTS%20LIVE%E3%81%AB%E8%A1%8C%E3%81%A3%E3%81%9F%E4%BA%BA%E3%81%AE%E6%84%9F%E6%83%B3%E3%82%92%E9%9B%86%E3%82%81%E3%81%A6%E3%81%84%E3%81%BE%E3%81%99%7C%E3%83%A9%E3%82%A4%E3%83%96%E3%83%AC%E3%83%9D%E3%83%BB%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E5%A3%B0(%E9%9D%9E%E5%85%AC%E5%BC%8F)&amp;url=https%3A%2F%2Fakb-hajimete-guide.netlify.app%2Freport" target="_blank" rel="noopener">Xで、このページをシェアする</a></p>
 
     <nav class="toc" aria-label="目次">
       <p class="toc-title">目次</p>
       <ol>
+        <li><a href="#vote">お楽しみ投票</a></li>
         <li><a href="#voices">行った人の声</a></li>
         <li><a href="#post">感想を送る</a></li>
         <li><a href="#rules">掲載のルール</a></li>
@@ -66,15 +68,31 @@
       </ol>
     </nav>
 
+    <h2 id="vote">お楽しみ投票:もう一度見たいのはどの公演?</h2>
+    <div id="vote-widget" hidden>
+      <p class="hint">お楽しみ投票です。1人1票でお願いします。現地・配信、どちらで見た人も投票できます。結果は、投票の受付が終わったあとに発表します。</p>
+      <form id="vote-form" class="form-box" name="vote" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="vote">
+        <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
+        <div class="field" role="radiogroup" aria-labelledby="q-vote-show">
+          <span class="label required" id="q-vote-show">もう一度見たいのは、どの公演?</span>
+          <div class="checks">
+            <label><input type="radio" name="show" value="9/26 12:30 新曲「好きish」コンサート" required> 9月26日(土)12:30 新曲「好きish」コンサート</label>
+            <label><input type="radio" name="show" value="9/26 18:30 全員「好きish」コンサート" required> 9月26日(土)18:30 全員「好きish」コンサート</label>
+            <label><input type="radio" name="show" value="9/27 16:00 推しが「好きish」コンサート" required> 9月27日(日)16:00 推しが「好きish」コンサート</label>
+          </div>
+        </div>
+        <button type="submit" class="submit-button">投票する</button>
+      </form>
+    </div>
+    <p id="vote-thanks" hidden>投票ありがとうございました。(このブラウザからは、もう一度は投票できません)</p>
+    <p id="vote-closed" class="pending" hidden>投票は終了しました。結果発表をお待ちください。</p>
+
     <h2 id="voices">行った人の声</h2>
     <p class="hint">感想は、公演ごとに、現地・配信の両方を載せています。「現地」「配信」のラベルで、見分けられます。</p>
     <div class="filter-group">
-      <p class="filter-title">見た方法</p>
-      <div id="voices-filter-style" class="filter-chips" aria-label="現地・配信で絞り込む"></div>
-    </div>
-    <div class="filter-group">
-      <p class="filter-title">どんな人の感想?</p>
-      <div id="voices-filter" class="filter-chips" aria-label="現地ライブ初参加・ファン歴で絞り込む"></div>
+      <p class="filter-title">公演で選ぶ</p>
+      <div id="voices-tabs" class="filter-chips" aria-label="公演で切り替える"></div>
     </div>
     <div id="voices-list"></div>
 
@@ -102,110 +120,22 @@
         </div>
       </div>
 
-      <div class="field" id="first-live-field" role="radiogroup" aria-labelledby="q-first-live">
-        <span class="label" id="q-first-live">(現地で見た人だけ)今回は、現地ライブの初参加ですか?</span>
-        <div class="checks">
-          <label><input type="radio" name="first_live" value="今回が初めて"> 今回が、現地ライブの初参加</label>
-          <label><input type="radio" name="first_live" value="参加経験あり"> 過去にも、現地ライブに参加したことがある</label>
-        </div>
-        <span class="hint">ファンになってからの長さとは、別の質問です。長く応援していても、現地ライブが初めてなら、「初参加」を選んでください。</span>
-      </div>
-
-      <div class="field" role="radiogroup" aria-labelledby="q-companion">
-        <span class="label" id="q-companion">誰と行きましたか?(任意。配信の人は、誰と見ましたか?)</span>
-        <div class="checks">
-          <label><input type="radio" name="companion" value="ひとり"> ひとり</label>
-          <label><input type="radio" name="companion" value="友達と"> 友達と</label>
-          <label><input type="radio" name="companion" value="家族と"> 家族と</label>
-        </div>
-        <span class="hint">「ひとりで行ってみたい」人の参考になります。答えなくても、送れます。</span>
-      </div>
-
       <div class="field" role="radiogroup" aria-labelledby="q-fan-years">
-        <span class="label" id="q-fan-years">ファン歴(任意)</span>
+        <span class="label required" id="q-fan-years">ファン歴</span>
         <div class="checks">
-          <label><input type="radio" name="fan_years" value="1年未満"> 1年未満</label>
-          <label><input type="radio" name="fan_years" value="1年以上3年未満"> 1年以上3年未満</label>
-          <label><input type="radio" name="fan_years" value="3年以上10年未満"> 3年以上10年未満</label>
-          <label><input type="radio" name="fan_years" value="10年以上"> 10年以上</label>
+          <label><input type="radio" name="fan_years" value="1年未満" required> 1年未満</label>
+          <label><input type="radio" name="fan_years" value="1年以上3年未満" required> 1年以上3年未満</label>
+          <label><input type="radio" name="fan_years" value="3年以上10年未満" required> 3年以上10年未満</label>
+          <label><input type="radio" name="fan_years" value="10年以上" required> 10年以上</label>
+        </div>
+        <div class="checks">
           <label><input type="checkbox" name="returned" value="yes"> 一度離れて、<strong>戻ってきた</strong>(出戻り)</label>
         </div>
-        <span class="hint">答えなくても、送れます。感想に、ラベルとして表示されます。年齢は、聞きません。</span>
+        <span class="hint">感想に、ラベルとして表示されます。</span>
       </div>
 
       <div class="field">
-        <label class="label" for="prefecture">どこから来ましたか?(都道府県・任意)</label>
-        <select id="prefecture" name="prefecture">
-          <option value="">選ばない</option>
-          <option value="北海道">北海道</option>
-          <option value="青森県">青森県</option>
-          <option value="岩手県">岩手県</option>
-          <option value="宮城県">宮城県</option>
-          <option value="秋田県">秋田県</option>
-          <option value="山形県">山形県</option>
-          <option value="福島県">福島県</option>
-          <option value="茨城県">茨城県</option>
-          <option value="栃木県">栃木県</option>
-          <option value="群馬県">群馬県</option>
-          <option value="埼玉県">埼玉県</option>
-          <option value="千葉県">千葉県</option>
-          <option value="東京都">東京都</option>
-          <option value="神奈川県">神奈川県</option>
-          <option value="新潟県">新潟県</option>
-          <option value="富山県">富山県</option>
-          <option value="石川県">石川県</option>
-          <option value="福井県">福井県</option>
-          <option value="山梨県">山梨県</option>
-          <option value="長野県">長野県</option>
-          <option value="岐阜県">岐阜県</option>
-          <option value="静岡県">静岡県</option>
-          <option value="愛知県">愛知県</option>
-          <option value="三重県">三重県</option>
-          <option value="滋賀県">滋賀県</option>
-          <option value="京都府">京都府</option>
-          <option value="大阪府">大阪府</option>
-          <option value="兵庫県">兵庫県</option>
-          <option value="奈良県">奈良県</option>
-          <option value="和歌山県">和歌山県</option>
-          <option value="鳥取県">鳥取県</option>
-          <option value="島根県">島根県</option>
-          <option value="岡山県">岡山県</option>
-          <option value="広島県">広島県</option>
-          <option value="山口県">山口県</option>
-          <option value="徳島県">徳島県</option>
-          <option value="香川県">香川県</option>
-          <option value="愛媛県">愛媛県</option>
-          <option value="高知県">高知県</option>
-          <option value="福岡県">福岡県</option>
-          <option value="佐賀県">佐賀県</option>
-          <option value="長崎県">長崎県</option>
-          <option value="熊本県">熊本県</option>
-          <option value="大分県">大分県</option>
-          <option value="宮崎県">宮崎県</option>
-          <option value="鹿児島県">鹿児島県</option>
-          <option value="沖縄県">沖縄県</option>
-          <option value="海外">海外</option>
-        </select>
-        <span class="hint">答えなくても、送れます。遠征する人向けの案内(会場までの行き方など)を考える参考にするだけで、<strong>感想と一緒には載せません</strong>。</span>
-      </div>
-
-      <div class="field">
-        <span class="label">前泊・後泊はしましたか?(任意)</span>
-        <div class="checks">
-          <label><input type="checkbox" name="stayed" value="前泊した"> 前泊した</label>
-          <label><input type="checkbox" name="stayed" value="後泊した"> 後泊した</label>
-        </div>
-        <span class="hint">答えなくても、送れます。日帰りの人は、どちらも選ばなくて大丈夫です。<strong>感想と一緒には載せません</strong>。</span>
-      </div>
-
-      <div class="field">
-        <label class="label" for="nickname">ニックネーム(任意)</label>
-        <input type="text" id="nickname" name="nickname" maxlength="20" autocomplete="off" placeholder="例: 初めてのAKBファン">
-        <span class="hint">本名や、SNSのアカウント名は、書かないでください。空欄なら「匿名」で載ります。</span>
-      </div>
-
-      <div class="field">
-        <label class="label required" for="message">感想</label>
+        <label class="label required" for="message">ひとこと感想(一言でOK)</label>
         <div class="write-hints" id="write-hints">
           <p class="write-hints-title">書くときのヒント: 全部に答えなくても、一言の感想でも大丈夫です</p>
           <ul>
@@ -220,9 +150,32 @@
       </div>
 
       <div class="field">
-        <label class="label" for="advice">次に初めて行く人への、ひと言アドバイス(任意)</label>
+        <label class="label" for="advice">次に初めて行く人への、ひと言アドバイス(一言でOK・任意)</label>
         <input type="text" id="advice" name="advice" maxlength="100" placeholder="例: 開場の時間に着くと、ロッカーで慌てませんでした">
         <span class="hint">答えなくても、送れます。載せてもらえたときは、感想のとなりに、目立つ形で表示します。</span>
+      </div>
+
+      <div class="field" role="radiogroup" aria-labelledby="q-age">
+        <span class="label required" id="q-age">年代</span>
+        <div class="checks">
+          <label><input type="radio" name="age" value="10代" required> 10代</label>
+          <label><input type="radio" name="age" value="20代" required> 20代</label>
+          <label><input type="radio" name="age" value="30代" required> 30代</label>
+          <label><input type="radio" name="age" value="40代" required> 40代</label>
+          <label><input type="radio" name="age" value="50代以上" required> 50代以上</label>
+          <label><input type="radio" name="age" value="答えない" required> 答えない</label>
+        </div>
+      </div>
+
+      <div class="field" role="radiogroup" aria-labelledby="q-gender">
+        <span class="label required" id="q-gender">性別</span>
+        <div class="checks">
+          <label><input type="radio" name="gender" value="男性" required> 男性</label>
+          <label><input type="radio" name="gender" value="女性" required> 女性</label>
+          <label><input type="radio" name="gender" value="その他" required> その他</label>
+          <label><input type="radio" name="gender" value="答えない" required> 答えない</label>
+        </div>
+        <span class="hint">年代と性別は、どんな人が来ているかを全体の割合で紹介するために使います。投稿ごとには表示しません。</span>
       </div>
 
       <div class="field">
@@ -233,12 +186,12 @@
 
       <div class="field">
         <div class="checks">
-          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。ニックネーム・感想・見た公演・現地か配信か・誰と行ったか・アドバイス・ファン歴などのラベル・ネタバレの有無を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます)</label>
+          <label><input type="checkbox" name="agree" value="yes" required> <a href="#rules">掲載のルール</a>を読みました。感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベル・ネタバレの有無を、このサイトに<strong>掲載してよい</strong>ことに、同意します。(掲載するかどうかは、運営者が決めます。表示名は「匿名」になります)</label>
         </div>
       </div>
 
       <button type="submit" class="submit-button">送信する</button>
-      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想の、ニックネーム・感想・見た公演・現地か配信か・誰と行ったか・アドバイス・現地ライブ初参加かどうか・ファン歴・出戻りのラベル・ネタバレの有無だけです。「どこから来たか」「前泊・後泊」は、感想と一緒には載せません。</p>
+      <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベル・ネタバレの有無だけです(表示名は「匿名」)。年代・性別は、全体の割合の集計にだけ使い、投稿ごとには載せません。</p>
     </form>
 
     <h2 id="rules">掲載のルール</h2>
@@ -254,7 +207,7 @@
         </ul>
       </li>
       <li>運営者が読んで、<strong>載せるものを選びます。すべてが載るわけではありません。</strong>意味が変わらない範囲で、誤字を直したり、長い文章を短くしたりすることがあります。</li>
-      <li>載せるのは、<strong>ニックネーム、感想、見た公演、現地か配信か、誰と行ったか、アドバイス、現地ライブ初参加かどうか、ファン歴、出戻りのラベル、ネタバレの有無</strong>だけです。答えなかった項目は、載りません。「どこから来たか」「前泊・後泊」は、感想と一緒には載せません。</li>
+      <li>載せるのは、<strong>感想、見た公演、現地か配信か、アドバイス、ファン歴・出戻りのラベル、ネタバレの有無</strong>だけです。表示名は、全員「匿名」になります。答えなかった項目は、載りません。「年代」「性別」は、感想と一緒には載せません(全体の割合の集計にだけ使います)。</li>
       <li>ネタバレを含む感想は、「ネタバレを含む」にチェックが入っていて、押すまで読めない形で載せます。</li>
     </ul>
 
@@ -280,13 +233,14 @@
     <p class="pending">実際のセットリストと歌唱メンバーが確定したら、<a href="live.html#setlist">ライブ情報のページ</a>に載せます。公演の前には、曲目は発表されていないので、予想は載せません。</p>
 
     <h2 id="remove">掲載の削除・修正のお願い</h2>
-    <p>このページに載った感想を、消してほしい、直してほしいときは、次のフォームから、お知らせください。確認して、対応します。(送られた内容と、送信に使われた通信の情報は、運営者だけが見られます)</p>
+    <p>このページに載った感想を、消してほしい、直してほしいときは、次のフォームから、お知らせください。確認して、対応します。(送られた内容と、送信に使われた通信の情報は、運営者だけが見られます)<br>
+    <a href="contact.html?reason=delete">お問い合わせ</a>からでも、同じように受け付けています。</p>
     <form class="form-box" name="remove-request" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="remove-request">
       <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
       <div class="field">
         <label class="label required" for="target">どの感想ですか?</label>
-        <input type="text" id="target" name="target" maxlength="100" required placeholder="例: 9月26日の公演の、ニックネーム「〇〇」の感想">
+        <input type="text" id="target" name="target" maxlength="100" required placeholder="例: 9月26日の公演の感想(送った日時が分かると助かります)">
       </div>
       <div class="field">
         <label class="label" for="request">お願いの内容(任意)</label>
@@ -299,12 +253,13 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>非公式ファンサイト / <a href="index.html">トップへ戻る</a> / <a href="past.html">過去の公演</a> / <a href="about.html">このサイトについて</a></p>
+      <p>非公式ファンサイト / <a href="index.html">トップへ戻る</a> / <a href="past.html">過去の公演</a> / <a href="about.html">このサイトについて</a> / <a href="contact.html">お問い合わせ</a></p>
     </div>
   </footer>
 
   <script src="data/voices.js"></script>
   <script src="report.js"></script>
   <script src="report-form.js"></script>
+  <script src="vote.js"></script>
 </body>
 </html>
