@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="analytics.js"></script>
+  <title>お問い合わせ|初めてのAKB48ガイド(非公式ファンサイト)</title>
+  <meta name="description" content="「初めてのAKB48ガイド」へのお問い合わせフォームです。記載の間違い、情報提供、投稿の削除のお願いなどを受け付けています。名前・メールアドレスは、どちらも任意です。">
+  <link rel="canonical" href="https://akb-hajimete-guide.netlify.app/contact.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="初めてのAKB48ガイド">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="お問い合わせ|初めてのAKB48ガイド">
+  <meta property="og:description" content="記載の間違い、情報提供、投稿の削除のお願いなどを受け付けています。">
+  <meta property="og:url" content="https://akb-hajimete-guide.netlify.app/contact.html">
+  <meta property="og:image" content="https://akb-hajimete-guide.netlify.app/ogp.png">
+  <meta property="og:image:alt" content="初めてのAKB48ガイド(非公式ファンサイト)">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="site-name" href="index.html">初めてのAKB48ガイド</a>
+      <nav class="site-nav">
+        <a href="live.html">ライブ</a>
+        <a href="handshakes.html">握手会</a>
+        <a href="theater.html">劇場公演</a>
+        <a href="apply.html">申し込み</a>
+        <a href="report.html">みんなの声</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-hero">
+    <div class="container">
+      <span class="hero-emoji" aria-hidden="true">✉️</span>
+      <p class="hero-title">お問い合わせ</p>
+      <p class="hero-sub">間違いの指摘、情報提供、削除のお願いなど</p>
+    </div>
+  </div>
+
+  <main class="container">
+
+    <h1>お問い合わせ</h1>
+
+    <div class="notice">
+      サイトの記載の間違い、情報提供、投稿の削除のお願いなどを受け付けています。<strong>名前・メールアドレスは、どちらも任意です。</strong>
+    </div>
+
+    <p>
+      ペンライトの色の間違いは、<a href="penlight.html#correction">ペンライトカラーの訂正フォーム</a>のほうが早く伝わります。それ以外の情報提供(MVのロケ地、当日の実体験など)は、このフォームで受け付けています。
+    </p>
+
+    <form id="contact-form" class="form-box" name="contact" method="POST" action="/contact-thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hp"><label>入力しないでください: <input name="bot-field" autocomplete="off" tabindex="-1"></label></p>
+
+      <div class="field" role="radiogroup" aria-labelledby="q-reason">
+        <span class="label required" id="q-reason">どんなご用件ですか?</span>
+        <div class="checks">
+          <label><input type="radio" name="reason" value="書いてある内容の間違いを教える" required> 書いてある内容の間違いを教える</label>
+          <label><input type="radio" name="reason" value="情報提供(MVのロケ地、ペンライトの色など)" required> 情報提供(MVのロケ地、ペンライトの色など)</label>
+          <label><input type="radio" name="reason" id="reason-delete" value="投稿の削除をお願いしたい" required> 投稿の削除をお願いしたい</label>
+          <label><input type="radio" name="reason" value="その他" required> その他</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <p id="delete-hint" class="write-hints" hidden>どの投稿か分かるように、送った日と、書き出しの数文字を教えてください。</p>
+        <label class="label required" for="message">内容</label>
+        <textarea id="message" name="message" rows="6" maxlength="1000" required></textarea>
+      </div>
+
+      <div class="field">
+        <label class="label" for="page-url">該当ページのURL(任意)</label>
+        <input type="text" id="page-url" name="page_url" maxlength="300">
+      </div>
+
+      <div class="field">
+        <label class="label" for="email">返信用のメールアドレス(任意)</label>
+        <input type="email" id="email" name="email" maxlength="200">
+        <span class="hint">返信が必要な場合だけで大丈夫です。</span>
+      </div>
+
+      <button type="submit" class="submit-button">送信する</button>
+      <p class="hint">いただいたメールアドレスは、返信以外には使いません。お問い合わせの内容をサイトに載せることはありません。送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。</p>
+    </form>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>非公式ファンサイト / <a href="index.html">トップへ戻る</a> / <a href="past.html">過去の公演</a> / <a href="about.html">このサイトについて</a> / <a href="contact.html">お問い合わせ</a></p>
+    </div>
+  </footer>
+
+  <script src="contact.js"></script>
+</body>
+</html>

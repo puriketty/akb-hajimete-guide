@@ -557,6 +557,7 @@ textarea { resize: vertical; }
 }
 .pl-left { display: flex; flex-direction: column; }
 .pl-name { font-weight: 700; }
+.pl-nickname { font-size: 0.8rem; color: var(--gray); }
 .pl-src { font-size: 0.7rem; color: var(--gray); }
 .pl-chips { display: flex; gap: 6px; }
 .pl-chip {

@@ -78,7 +78,7 @@ function render() {
   PENLIGHT.groups.forEach(function (group) {
     const members = PENLIGHT.members.filter(function (m) {
       if (m.group !== group) return false;
-      if (query && m.name.indexOf(query) === -1) return false;
+      if (query && m.name.indexOf(query) === -1 && (m.nickname || "").indexOf(query) === -1) return false;
       if (selectedColor && m.colors.indexOf(selectedColor) === -1) return false;
       if (CAST && castCheck && castCheck.checked && CAST.names.indexOf(m.name) === -1) return false;
       return true;
@@ -91,6 +91,7 @@ function render() {
       const item = el("div", "pl-item");
       const left = el("div", "pl-left");
       left.appendChild(el("span", "pl-name", m.name));
+      if (m.nickname) left.appendChild(el("span", "pl-nickname", m.nickname));
       item.appendChild(left);
 
       const chips = el("div", "pl-chips");
