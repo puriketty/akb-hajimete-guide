@@ -991,3 +991,36 @@ body.sheet-open { overflow: hidden; }
   text-decoration: none;
 }
 .streaming-button:hover { background: var(--pink-light); }
+
+/* ===== トップの「このサイトについて」導線(K) ===== */
+.about-teaser {
+  margin: 2px 0 16px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--gray);
+}
+.about-teaser a { margin-left: 6px; white-space: nowrap; }
+@media (max-width: 480px) {
+  .about-teaser { font-size: 0.76rem; }
+}
+
+.operator-teaser {
+  margin: 20px 0;
+  padding: 14px 16px;
+  background: #fff;
+  border: 2px solid var(--pink-soft);
+  border-radius: var(--radius);
+}
+.operator-teaser h3 { margin: 0 0 10px; font-size: 1rem; color: var(--pink-deep); }
+.operator-teaser-row { display: flex; align-items: center; margin-bottom: 10px; }
+.operator-teaser-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--pink-light);
+  border: 2px solid var(--pink-soft);
+  object-fit: cover;
+}
+.operator-teaser-avatar + .operator-teaser-avatar { margin-left: -10px; }
+.operator-teaser-names { margin-left: 8px; font-weight: 700; color: var(--pink-deep); font-size: 0.92rem; }
+.operator-teaser p { margin: 6px 0; font-size: 0.92rem; }
