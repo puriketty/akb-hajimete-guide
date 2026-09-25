@@ -13,7 +13,11 @@
 //     人が読んでいる時間を置いてから、もう一度お試しくださいと伝える(reCAPTCHAは使わない、簡易な対策)。
 //
 // フォーム側の決まり:
-//  - <form> に data-netlify="true" があるものを、自動でこの仕組みの対象にする。
+//  - <form> に class="js-ajax-form" があるものを、自動でこの仕組みの対象にする
+//    (data-netlify="true" では選べない。Netlifyがフォームを検出したあと、配信するHTMLから
+//    data-netlify属性を取り除いてしまうため(2026-09-26に発覚。ソースには残っているが、
+//    実際にブラウザに届くHTMLには無い)。data-netlify="true" 自体は、Netlifyがビルド時に
+//    フォームを検出するために必要なので、HTML側からは削除しないこと)。
 //  - 送信ボタンは、フォーム内の button[type="submit"] とする。
 //  - 送信に成功したとき・失敗したときに、ほかのスクリプト(vote.js など)が追加の処理をしたい場合は、
 //    フォーム要素で "ajaxform:success" / "ajaxform:error" イベントを購読する。
@@ -170,4 +174,4 @@ function setupForm(form) {
   });
 }
 
-document.querySelectorAll('form[data-netlify="true"]').forEach(setupForm);
+document.querySelectorAll("form.js-ajax-form").forEach(setupForm);
