@@ -6,7 +6,8 @@
 //  1. 送信ボタンを押した瞬間に「送信中…」にして、二重送信を防ぐ。
 //  2. 必須項目が空のときは、ブラウザ標準の注意書き(スマホだと画面外に出て気づけないことがある)の代わりに、
 //     その項目までスクロールして、日本語で「入力してください」と表示する。
-//  3. 成功したら、ページ遷移せずに、フォームの場所に大きく「送信ありがとうございました」を出す。
+//  3. 成功したら、ページ遷移せずに、フォームの場所に大きく「送信ありがとうございました」を出す
+//     (フォームに data-success-title="◯◯" があれば、その文言を使う)。
 //  4. 失敗したら「送信できませんでした。時間をおいてもう一度お試しください」と出す(黙って終わらせない)。
 //  5. ものすごく短い時間(1.5秒未満)で送信された場合は、機械的な送信の可能性が高いため、
 //     人が読んでいる時間を置いてから、もう一度お試しくださいと伝える(reCAPTCHAは使わない、簡易な対策)。
@@ -102,7 +103,7 @@ function setupForm(form) {
   const successBox = el("div", "form-result form-success");
   successBox.setAttribute("role", "status");
   successBox.hidden = true;
-  successBox.appendChild(el("p", "form-result-title", "送信ありがとうございました"));
+  successBox.appendChild(el("p", "form-result-title", form.dataset.successTitle || "送信ありがとうございました"));
 
   const errorBox = el("div", "form-result form-error");
   errorBox.setAttribute("role", "alert");

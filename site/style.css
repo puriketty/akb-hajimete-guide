@@ -433,6 +433,7 @@ textarea { resize: vertical; }
 .share-button {
   display: inline-block;
   padding: 8px 22px;
+  border: none;
   border-radius: 999px;
   background: #111;
   color: #fff;
@@ -1024,3 +1025,24 @@ body.sheet-open { overflow: hidden; }
 .operator-teaser-avatar + .operator-teaser-avatar { margin-left: -10px; }
 .operator-teaser-names { margin-left: 8px; font-weight: 700; color: var(--pink-deep); font-size: 0.92rem; }
 .operator-teaser p { margin: 6px 0; font-size: 0.92rem; }
+
+/* ===== みんなの声: 感想の送信後、Xでシェア(P) ===== */
+.voice-share {
+  margin: 16px 0;
+  padding: 16px;
+  background: var(--pink-light);
+  border: 2px dashed var(--pink-soft);
+  border-radius: var(--radius);
+}
+.voice-share-label { margin: 14px 0 4px; font-weight: 700; color: var(--pink-deep); }
+.voice-share-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.voice-card-section { margin: 12px 0; }
+.voice-card-preview-img {
+  display: block;
+  max-width: 280px;
+  width: 100%;
+  margin: 8px 0;
+  border: 2px solid var(--pink-soft);
+  border-radius: 14px;
+}
+.voice-card-adjust { margin: 10px 0; }
