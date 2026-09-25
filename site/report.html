@@ -97,7 +97,7 @@
     <h2 id="post">感想を送る</h2>
     <p>行った公演の感想を、送ってください。初めて行った人の感想も、長く応援している人の感想も、歓迎です。配信で見た人の感想も、歓迎です。<a href="#rules">掲載のルール</a>を、先に読んでください。</p>
     <p><strong>1回の送信で書けるのは、1公演分の感想です。</strong>複数の公演について書きたいときは、公演ごとに、分けて送ってください。</p>
-    <form id="voice-form" class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true">
+    <form id="voice-form" class="form-box" name="voice" method="POST" action="/thanks.html" data-netlify="true" data-success-title="感想を受け付けました!">
       <input type="hidden" name="form-name" value="voice">
 
       <div class="field" role="radiogroup" aria-labelledby="q-show">
@@ -185,6 +185,34 @@
       <p class="hint">送られた内容と、送信に使われた通信の情報(IPアドレス、ブラウザの種類など)は、このサイトを配信しているサービス(Netlify)に保存され、運営者だけが見られます。公開はしません。載せるのは、掲載に同意してもらった感想・見た公演・現地か配信か・アドバイス・ファン歴・出戻りのラベルだけです(表示名は「匿名」)。年代・性別は、全体の割合の集計にだけ使い、投稿ごとには載せません。</p>
     </form>
 
+    <div id="voice-share" class="voice-share" hidden>
+      <p>サイトへの掲載は、運営者が確認してから行います。</p>
+
+      <p class="voice-share-label">この感想をXでシェアしませんか?(任意)</p>
+      <div class="field">
+        <label class="label" for="voice-share-preview">投稿文のプレビュー(自由に書き換えられます)</label>
+        <textarea id="voice-share-preview" rows="6"></textarea>
+        <span class="hint counter"><span id="voice-share-length">0</span>文字(Xでの実際の文字数の判定とは異なることがあります)</span>
+      </div>
+      <div class="voice-share-buttons">
+        <button type="button" id="voice-share-x" class="share-button">Xで感想をシェア</button>
+        <button type="button" id="voice-share-card" class="small-button">感想カードを保存</button>
+      </div>
+      <p class="hint">画像で共有したい方は、保存してXでご自身で添付してください(自動では添付されません)。スマホでうまく保存できないときは、表示された画像を長押しして「写真に保存」を選んでください。</p>
+
+      <div id="voice-card-section" class="voice-card-section" hidden>
+        <canvas id="voice-card-canvas" hidden></canvas>
+        <img id="voice-card-preview-img" class="voice-card-preview-img" alt="感想カードのプレビュー画像">
+        <div id="voice-card-adjust" class="voice-card-adjust" hidden>
+          <label class="label" for="voice-card-text">感想が長いため、カードに載せる文章を短くしています(調整できます)</label>
+          <textarea id="voice-card-text" rows="5"></textarea>
+          <button type="button" id="voice-card-save-adjusted" class="small-button">この内容で作り直して保存する</button>
+        </div>
+      </div>
+
+      <p><a href="#voices">→ みんなの声へ戻る</a></p>
+    </div>
+
     <h2 id="rules">掲載のルール</h2>
     <ul>
       <li><strong>歓迎するもの:</strong> 公演への感想、好きになった曲やシーン、初めて行く人へのアドバイス、行ってみて意外だったこと。</li>
@@ -251,5 +279,6 @@
   <script src="report-form.js"></script>
   <script src="form-submit.js"></script>
   <script src="vote.js"></script>
+  <script src="report-share.js"></script>
 </body>
 </html>
