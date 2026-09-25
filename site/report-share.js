@@ -135,7 +135,7 @@ if (shareVoiceForm && voiceShareBox) {
     const maxSize = 52;
     const minSize = 28;
     for (let size = maxSize; size >= minSize; size -= 2) {
-      ctx.font = "500 " + size + "px 'Zen Maru Gothic', sans-serif";
+      ctx.font = "700 " + size + "px 'Zen Maru Gothic', sans-serif";
       const lineHeight = Math.round(size * 1.55);
       const lines = wrapLines(ctx, text, maxWidth);
       if (lines.length * lineHeight <= maxHeight) {
@@ -143,7 +143,7 @@ if (shareVoiceForm && voiceShareBox) {
       }
     }
     // 最小サイズでも収まらない場合は、入る分だけにして、最後の行を「…」で切る
-    ctx.font = "500 " + minSize + "px 'Zen Maru Gothic', sans-serif";
+    ctx.font = "700 " + minSize + "px 'Zen Maru Gothic', sans-serif";
     const lineHeight = Math.round(minSize * 1.55);
     const maxLines = Math.max(1, Math.floor(maxHeight / lineHeight));
     let lines = wrapLines(ctx, text, maxWidth);
@@ -167,44 +167,86 @@ if (shareVoiceForm && voiceShareBox) {
 
     const pink = cssVar("--pink", "#ff5c9d");
     const pinkDeep = cssVar("--pink-deep", "#e0337a");
-    const pinkLight = cssVar("--pink-light", "#fff0f6");
     const pinkSoft = cssVar("--pink-soft", "#ffd3e6");
     const textColor = cssVar("--text", "#43303a");
     const gray = cssVar("--gray", "#86727c");
 
     ctx.clearRect(0, 0, size, size);
-    ctx.fillStyle = pinkLight;
+
+    // 背景: 単色ではなく、ライブ感の出る斜めのグラデーション
+    const bgGradient = ctx.createLinearGradient(0, 0, size, size);
+    bgGradient.addColorStop(0, pink);
+    bgGradient.addColorStop(1, pinkDeep);
+    ctx.fillStyle = bgGradient;
     ctx.fillRect(0, 0, size, size);
 
-    const pad = 48;
+    const pad = 56;
+
+    // 白いカードの下に、サイトのボタンと同じ「ぷっくり浮いた」影を敷く(のっぺりさせない)
+    roundRect(ctx, pad, pad + 12, size - pad * 2, size - pad * 2, 32);
+    ctx.fillStyle = pinkDeep;
+    ctx.fill();
+
     roundRect(ctx, pad, pad, size - pad * 2, size - pad * 2, 32);
     ctx.fillStyle = "#ffffff";
     ctx.fill();
-    ctx.setLineDash([6, 8]);
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 5;
     ctx.strokeStyle = pinkSoft;
     ctx.stroke();
-    ctx.setLineDash([]);
 
-    const innerPad = pad + 56;
+    // カードの角に、シールのようにキラキラを飾る(かぶらないよう、カードの外周の上に乗せる)
+    ctx.textBaseline = "middle";
+    ctx.textAlign = "center";
+    [
+      { x: size - pad - 6, y: pad + 2, s: 44 },
+      { x: pad + 4, y: size - pad - 2, s: 36 },
+      { x: size - pad + 4, y: size - pad - 60, s: 30 }
+    ].forEach(function (spot) {
+      ctx.font = spot.s + "px sans-serif";
+      ctx.fillText("✨", spot.x, spot.y);
+    });
+    ctx.textAlign = "left";
+
+    const innerPad = pad + 52;
     ctx.textBaseline = "top";
 
     ctx.fillStyle = pinkDeep;
-    ctx.font = "700 32px 'Zen Maru Gothic', sans-serif";
-    ctx.fillText("初めてのAKB48ガイド ・ みんなの声", innerPad, innerPad);
+    ctx.font = "700 30px 'Zen Maru Gothic', sans-serif";
+    ctx.fillText("🎤 初めてのAKB48ガイド ・ みんなの声", innerPad, innerPad);
 
-    // バッジ(公演・現地/配信)
+    // 「AKB48 THREE CONCEPTS LIVE」を、チケットの半券のような帯で見せる
+    const bannerY = innerPad + 50;
+    const bannerHeight = 66;
+    const bannerWidth = size - innerPad * 2;
+    const bannerGradient = ctx.createLinearGradient(innerPad, 0, innerPad + bannerWidth, 0);
+    bannerGradient.addColorStop(0, pinkDeep);
+    bannerGradient.addColorStop(1, pink);
+    roundRect(ctx, innerPad, bannerY, bannerWidth, bannerHeight, bannerHeight / 2);
+    ctx.fillStyle = bannerGradient;
+    ctx.fill();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "700 30px 'Zen Maru Gothic', sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("🎫 AKB48 THREE CONCEPTS LIVE", innerPad + bannerWidth / 2, bannerY + 16);
+    ctx.textAlign = "left";
+
+    // 公演の詳細(選んだ公演のフルテキスト)
     ctx.font = "700 28px 'Zen Maru Gothic', sans-serif";
-    ctx.fillText("AKB48 THREE CONCEPTS LIVE", innerPad, innerPad + 52);
-    ctx.font = "500 28px 'Zen Maru Gothic', sans-serif";
+    ctx.fillStyle = textColor;
+    const showTop = bannerY + bannerHeight + 26;
     const showLines = wrapLines(ctx, submitted.show, size - innerPad * 2);
     showLines.forEach(function (line, index) {
-      ctx.fillText(line, innerPad, innerPad + 94 + index * 42);
+      ctx.fillText(line, innerPad, showTop + index * 42);
     });
-    const badgeY = innerPad + 94 + showLines.length * 42 + 16;
+
+    // バッジ(公演の略称・現地/配信)。ボタンと同じ、影付きのぷっくりしたピル型
+    const badgeY = showTop + showLines.length * 42 + 20;
     ctx.font = "700 26px 'Zen Maru Gothic', sans-serif";
     function drawBadge(label, x, background, color) {
       const w = ctx.measureText(label).width + 44;
+      roundRect(ctx, x, badgeY + 5, w, 48, 24);
+      ctx.fillStyle = pinkDeep;
+      ctx.fill();
       roundRect(ctx, x, badgeY, w, 48, 24);
       ctx.fillStyle = background;
       ctx.fill();
@@ -213,12 +255,21 @@ if (shareVoiceForm && voiceShareBox) {
       return w;
     }
     let bx = innerPad;
-    bx += drawBadge(showLabelFor(submitted.show), bx, pink, "#ffffff") + 12;
-    if (submitted.place) drawBadge(submitted.place, bx, "#ffffff", pinkDeep);
+    bx += drawBadge(showLabelFor(submitted.show), bx, "#ffffff", pinkDeep) + 14;
+    if (submitted.place) drawBadge(submitted.place, bx, pink, "#ffffff");
 
-    const textTop = badgeY + 90;
+    const textTop = badgeY + 96;
     const textAreaWidth = size - innerPad * 2;
-    const textAreaHeight = size - pad - 120 - textTop;
+    const textAreaHeight = size - pad - 130 - textTop;
+
+    // 感想の背景に、大きな飾りの引用符(迫力を出しつつ、本文の邪魔にならないよう薄く)
+    ctx.save();
+    ctx.globalAlpha = 0.14;
+    ctx.fillStyle = pink;
+    ctx.font = "700 220px Georgia, serif";
+    ctx.fillText("“", innerPad - 12, textTop - 60);
+    ctx.restore();
+
     const fit = fitText(ctx, text, textAreaWidth, textAreaHeight);
 
     ctx.fillStyle = textColor;
@@ -231,7 +282,7 @@ if (shareVoiceForm && voiceShareBox) {
     ctx.font = "500 24px 'Zen Maru Gothic', sans-serif";
     ctx.fillStyle = gray;
     ctx.textBaseline = "bottom";
-    ctx.fillText("非公式ファンサイト ・ " + SITE_URL.replace("https://", ""), innerPad, size - pad - 40);
+    ctx.fillText("🎶 非公式ファンサイト ・ " + SITE_URL.replace("https://", ""), innerPad, size - pad - 40);
 
     return fit;
   }
