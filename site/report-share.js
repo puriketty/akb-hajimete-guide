@@ -48,7 +48,8 @@ if (shareVoiceForm && voiceShareBox) {
   }
 
   function buildTweetText(data) {
-    const header = "AKB48 THREE CONCEPTS LIVE(" + showLabelFor(data.show) + ")に行きました!\n\n";
+    const experience = data.place === "配信" ? "を配信で見ました!" : "に行きました!";
+    const header = "AKB48 THREE CONCEPTS LIVE(" + showLabelFor(data.show) + ")" + experience + "\n\n";
     const footer = "\n\n" + HASHTAGS + "\n" + SITE_URL;
     const budget = Math.max(20, TWEET_TARGET_LENGTH - header.length - footer.length - 2);
     return header + "「" + excerpt(data.message, budget) + "」" + footer;
@@ -193,7 +194,14 @@ if (shareVoiceForm && voiceShareBox) {
     ctx.fillText("初めてのAKB48ガイド ・ みんなの声", innerPad, innerPad);
 
     // バッジ(公演・現地/配信)
-    const badgeY = innerPad + 58;
+    ctx.font = "700 28px 'Zen Maru Gothic', sans-serif";
+    ctx.fillText("AKB48 THREE CONCEPTS LIVE", innerPad, innerPad + 52);
+    ctx.font = "500 28px 'Zen Maru Gothic', sans-serif";
+    const showLines = wrapLines(ctx, submitted.show, size - innerPad * 2);
+    showLines.forEach(function (line, index) {
+      ctx.fillText(line, innerPad, innerPad + 94 + index * 42);
+    });
+    const badgeY = innerPad + 94 + showLines.length * 42 + 16;
     ctx.font = "700 26px 'Zen Maru Gothic', sans-serif";
     function drawBadge(label, x, background, color) {
       const w = ctx.measureText(label).width + 44;
