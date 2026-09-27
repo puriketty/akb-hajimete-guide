@@ -1,6 +1,12 @@
 // ============================================================
-// 「劇場公演のセットリスト」の表示
-// データは data/songs.js(曲)・data/setlists.js(公演)にある。
+// セットリスト共通の仕組み(曲データ・配信リンクの自動生成・ボトムシート)。
+// data/songs.js(曲)・data/setlists.js(公演)を使う。
+//
+// このファイルは、劇場公演(setlist.html)とライブ(live-setlist.html。live-setlist.js)の、
+// 両方のページから読み込む。songsById・配信URLの組み立て・ボトムシートの開閉は、ここで一度だけ作り、
+// どちらのページからも同じものを使う(ライブ用に別の仕組みは作らない)。
+//
+// 劇場公演のページ自体の表示(#setlist-title などがあるとき)は、このファイルがそのまま行う。
 // URLの ?stage= で、公演を切り替える(例: setlist.html?stage=kokokarada)。省略時は、最初の公演。
 //
 // 曲をタップすると、画面下からパネル(ボトムシート)が1枚だけ出る。
@@ -73,10 +79,13 @@ const sheetSpotify = document.getElementById("song-sheet-spotify");
 const sheetYoutube = document.getElementById("song-sheet-youtube");
 const sheetOfficial = document.getElementById("song-sheet-official");
 const sheetCloseButton = document.getElementById("song-sheet-close");
+const sheetMembers = document.getElementById("song-sheet-members");
 
 let activeSetlist = null;
 
-function openSheet(song) {
+// item(ライブの行データ)を渡すと、センター(強調)と歌唱メンバー全員を、ボトムシートに追加で表示する。
+// 劇場公演(itemを渡さない)では、この部分は表示しない。
+function openSheet(song, item) {
   sheetTitle.textContent = song.title;
   const credit = [song.lyricist ? "作詞: " + song.lyricist : "", song.composer ? "作曲: " + song.composer : ""]
     .filter(function (s) {
@@ -85,10 +94,28 @@ function openSheet(song) {
     .join(" / ");
   sheetCredit.textContent = credit;
   sheetCredit.hidden = credit === "";
+
+  if (sheetMembers) {
+    sheetMembers.replaceChildren();
+    if (item && item.center) {
+      const centerLine = el("strong", "sheet-members-center", item.center);
+      sheetMembers.appendChild(centerLine);
+      if (item.detail && item.detail !== item.center) {
+        sheetMembers.appendChild(document.createElement("br"));
+        sheetMembers.appendChild(el("span", "sheet-members-detail", "歌唱メンバー: " + item.detail));
+      }
+      sheetMembers.hidden = false;
+    } else {
+      sheetMembers.hidden = true;
+    }
+  }
+
   sheetApple.href = appleMusicUrl(song);
   sheetSpotify.href = spotifyUrl(song);
   sheetYoutube.href = youtubeMusicUrl(song);
-  if (activeSetlist) sheetOfficial.href = activeSetlist.officialUrl;
+  const officialUrl = activeSetlist && activeSetlist.officialUrl;
+  sheetOfficial.hidden = !officialUrl;
+  if (officialUrl) sheetOfficial.href = officialUrl;
 
   overlay.hidden = false;
   sheet.hidden = false;
@@ -162,4 +189,8 @@ function render() {
   sourceBox.appendChild(document.createTextNode("(" + setlist.checkedAt + " 確認)"));
 }
 
-render();
+// 劇場公演のページ(#setlist-title などがある)のときだけ、ここで表示を組み立てる。
+// ライブのページ(live-setlist.js)は、この下の共通の仕組みだけを使って、自分で表示を組み立てる。
+if (titleBox && listBox && sourceBox) {
+  render();
+}
