@@ -79,10 +79,13 @@ const sheetSpotify = document.getElementById("song-sheet-spotify");
 const sheetYoutube = document.getElementById("song-sheet-youtube");
 const sheetOfficial = document.getElementById("song-sheet-official");
 const sheetCloseButton = document.getElementById("song-sheet-close");
+const sheetMembers = document.getElementById("song-sheet-members");
 
 let activeSetlist = null;
 
-function openSheet(song) {
+// item(ライブの行データ)を渡すと、センター(強調)と歌唱メンバー全員を、ボトムシートに追加で表示する。
+// 劇場公演(itemを渡さない)では、この部分は表示しない。
+function openSheet(song, item) {
   sheetTitle.textContent = song.title;
   const credit = [song.lyricist ? "作詞: " + song.lyricist : "", song.composer ? "作曲: " + song.composer : ""]
     .filter(function (s) {
@@ -91,6 +94,22 @@ function openSheet(song) {
     .join(" / ");
   sheetCredit.textContent = credit;
   sheetCredit.hidden = credit === "";
+
+  if (sheetMembers) {
+    sheetMembers.replaceChildren();
+    if (item && item.center) {
+      const centerLine = el("strong", "sheet-members-center", item.center);
+      sheetMembers.appendChild(centerLine);
+      if (item.detail && item.detail !== item.center) {
+        sheetMembers.appendChild(document.createElement("br"));
+        sheetMembers.appendChild(el("span", "sheet-members-detail", "歌唱メンバー: " + item.detail));
+      }
+      sheetMembers.hidden = false;
+    } else {
+      sheetMembers.hidden = true;
+    }
+  }
+
   sheetApple.href = appleMusicUrl(song);
   sheetSpotify.href = spotifyUrl(song);
   sheetYoutube.href = youtubeMusicUrl(song);

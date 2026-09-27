@@ -79,10 +79,11 @@ function renderRow(item) {
     let title = song.title;
     if (item.note) title += "(" + item.note + ")";
     main.appendChild(el("span", "live-row-title", title));
-    if (item.detail) main.appendChild(el("span", "live-row-detail", item.detail));
+    // 一覧にはセンターだけ(全員の歌唱メンバーは、タップ後のシートで見せる)
+    if (item.center) main.appendChild(el("span", "live-row-detail", item.center));
     button.appendChild(main);
     button.addEventListener("click", function () {
-      openSheet(song);
+      openSheet(song, item);
     });
     li.appendChild(button);
   } else {

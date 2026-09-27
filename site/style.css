@@ -993,6 +993,11 @@ body.sheet-open { overflow: hidden; }
 }
 .streaming-button:hover { background: var(--pink-light); }
 
+/* ボトムシート内の「歌唱メンバー」(ライブのセットリストで使う。センターを強調して先に見せる) */
+.sheet-members { margin: 6px 0 0; font-size: 0.95rem; }
+.sheet-members-center { color: var(--pink-deep); }
+.sheet-members-detail { display: inline-block; margin-top: 4px; color: var(--gray); font-size: 0.88rem; }
+
 /* ===== ライブのセットリスト(live-setlist.html) ===== */
 .live-setlist-list { list-style: none; padding: 0; margin: 16px 0; }
 .live-row { margin: 0; border-bottom: 2px dotted var(--pink-soft); }
