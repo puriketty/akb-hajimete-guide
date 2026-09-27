@@ -993,6 +993,35 @@ body.sheet-open { overflow: hidden; }
 }
 .streaming-button:hover { background: var(--pink-light); }
 
+/* ===== ライブのセットリスト(live-setlist.html) ===== */
+.live-setlist-list { list-style: none; padding: 0; margin: 16px 0; }
+.live-row { margin: 0; border-bottom: 2px dotted var(--pink-soft); }
+.live-row-button {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 8px;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 1.02rem;
+  text-align: left;
+  color: var(--text);
+  cursor: pointer;
+}
+.live-row button.live-row-button:hover, .live-row button.live-row-button:active { background: var(--pink-light); }
+.live-row-track { flex: 0 0 auto; min-width: 44px; padding-top: 2px; font-weight: 700; color: var(--pink-deep); }
+.live-row-main { flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; }
+.live-row-title { font-weight: 700; }
+.live-row-detail { font-size: 0.85rem; color: var(--gray); }
+/* MC・映像・影アナ・overtureなど、曲でない行(タップできない。色を薄くして見分ける) */
+.live-row-note .live-row-button { cursor: default; }
+.live-row-note .live-row-track { color: var(--gray); }
+.live-row-note .live-row-title { font-weight: 500; color: var(--gray); }
+.live-row-note .live-row-detail { color: var(--gray); }
+
 /* ===== トップの「このサイトについて」導線(K) ===== */
 .about-teaser {
   margin: 2px 0 16px;
