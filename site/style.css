@@ -1027,6 +1027,23 @@ body.sheet-open { overflow: hidden; }
 .live-row-note .live-row-title { font-weight: 500; color: var(--gray); }
 .live-row-note .live-row-detail { color: var(--gray); }
 
+/* 出典リンク([1][2])、公演の注記・発表・出典一覧 */
+.live-row { display: flex; align-items: flex-start; }
+.live-row .live-row-button { flex: 1 1 auto; width: auto; min-width: 0; }
+.live-row-src { flex: 0 0 auto; padding: 12px 8px 0 0; font-size: 0.8rem; white-space: nowrap; }
+.src-link { display: inline-block; padding: 4px 3px; }
+.src-fan { color: #245a94; }
+.live-row-fan { overflow-wrap: anywhere; }
+.live-row-fan .ex { margin-right: 4px; }
+button.live-row-button .live-row-fan { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.live-source-list .ex { margin-right: 4px; }
+.live-inline-src { font-size: 0.85rem; }
+.live-order-note, .live-intro { font-size: 0.9rem; color: var(--gray); margin: 8px 0; }
+.live-sub-title { margin: 18px 0 6px; font-size: 1rem; color: var(--pink-deep); }
+.live-notices { margin: 6px 0; padding-left: 1.2em; }
+.live-source-list { margin: 6px 0; padding-left: 1.6em; font-size: 0.88rem; }
+.live-source-list li { margin: 4px 0; overflow-wrap: anywhere; }
+
 /* ===== トップの「このサイトについて」導線(K) ===== */
 .about-teaser {
   margin: 2px 0 16px;
