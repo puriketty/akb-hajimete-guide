@@ -300,19 +300,17 @@
     <h2 id="setlist">セットリストと歌唱メンバー</h2>
     <p class="pending" data-active-only="three-concepts-live">9月26日・27日の公演の、実際のセットリストと歌唱メンバーが確定したら、ここに載せます。公演の前には、曲目は発表されていないので、予想は載せません。</p>
     <div data-ended-only="three-concepts-live" hidden>
-      <p>公演は終了しました。実際のセットリストと歌唱メンバーは、公式や確かな情報で確認できたものだけを、公演ごとに載せます(予想は載せません)。<strong>まだ見ていない人向けに、押すまで見えない形にしています。</strong>配信の見逃し視聴は、<a href="#stream">2026年10月27日(火)23:59まで</a>です。</p>
+      <p>公演は終了しました。セットリストは、公演ごとに、出典のリンクを付けて載せています。<strong>まだ見ていない人向けに、押すまで見えない形にしています。</strong></p>
+      <p class="notice"><strong>ネタバレ注意：Huluの見逃し配信は10/27 23:59まで</strong></p>
+      <div class="filter-group">
+        <p class="filter-title">公演を選ぶ</p>
+        <div id="live-embed-tabs" class="filter-chips" aria-label="公演で切り替える"></div>
+      </div>
       <details class="spoiler-box">
-        <summary>9月26日(土)12:30 新曲「好きish」コンサート(ネタバレ注意)</summary>
-        <p class="pending">確認でき次第、掲載します。</p>
+        <summary>セットリストを見る(ネタバレ注意)</summary>
+        <div id="live-embed-body"></div>
       </details>
-      <details class="spoiler-box">
-        <summary>9月26日(土)18:30 全員「好きish」コンサート(ネタバレ注意)</summary>
-        <p class="pending">確認でき次第、掲載します。</p>
-      </details>
-      <details class="spoiler-box">
-        <summary>9月27日(日)16:00 推しが「好きish」コンサート(ネタバレ注意)</summary>
-        <p class="pending">確認でき次第、掲載します。</p>
-      </details>
+      <p>曲名から配信サービスで探したいときは、<a href="live-setlist.html">ライブのセットリスト</a>のページが使えます。</p>
     </div>
     <p>行った人の感想は、<a href="report.html">ライブレポ・みんなの声</a>に集めています。</p>
     <h2 id="links">公式リンク集</h2>
@@ -339,6 +337,10 @@
   </footer>
 
   <script src="video.js"></script>
+  <script src="data/songs.js"></script>
+  <script src="data/setlists.js"></script>
+  <script src="live-setlist-view.js"></script>
+  <script src="live-setlist-embed.js"></script>
   <script src="data/schedule.js"></script>
   <script src="schedule.js"></script>
   <script src="table.js"></script>

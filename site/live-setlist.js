@@ -3,8 +3,8 @@
 //
 // 曲データ・配信リンクの自動生成・ボトムシートの開閉は、setlist.js の仕組みをそのまま使う
 // (songsById・appleMusicUrl/spotifyUrl/youtubeMusicUrl・openSheet/closeSheet・activeSetlist・el)。
-// このファイルが新しく作っているのは、「公演を選ぶタブ」と、MC・映像なども行に含めた
-// 詳しい表示(items)の組み立てだけ。
+// このファイルが新しく作っているのは、「公演を選ぶタブ」だけ。行・出典の組み立ては、
+// live-setlist-view.js(live.html と共通)がする。
 //
 // URLの ?stage= で、公演を切り替える(例: live-setlist.html?stage=three-concepts-0926-yoru)。
 // ============================================================
@@ -66,41 +66,6 @@ function renderTabs() {
   });
 }
 
-function renderRow(item) {
-  const li = el("li", "live-row" + (item.type === "note" ? " live-row-note" : ""));
-
-  if (item.type === "song") {
-    const song = songsById[item.songId];
-    if (!song) return li;
-    const button = el("button", "live-row-button");
-    button.type = "button";
-    button.appendChild(el("span", "live-row-track", item.track));
-    const main = el("span", "live-row-main");
-    let title = song.title;
-    if (item.note) title += "(" + item.note + ")";
-    main.appendChild(el("span", "live-row-title", title));
-    // 一覧にはセンターだけ(全員の歌唱メンバーは、タップ後のシートで見せる)
-    if (item.center) main.appendChild(el("span", "live-row-detail", item.center));
-    button.appendChild(main);
-    button.addEventListener("click", function () {
-      openSheet(song, item);
-    });
-    li.appendChild(button);
-  } else {
-    const wrap = el("div", "live-row-button");
-    wrap.appendChild(el("span", "live-row-track", item.track));
-    const main = el("span", "live-row-main");
-    let name = item.name;
-    if (item.note) name += "(" + item.note + ")";
-    main.appendChild(el("span", "live-row-title", name));
-    if (item.detail) main.appendChild(el("span", "live-row-detail", item.detail));
-    wrap.appendChild(main);
-    li.appendChild(wrap);
-  }
-
-  return li;
-}
-
 function renderLive() {
   renderTabs();
 
@@ -122,23 +87,8 @@ function renderLive() {
     return;
   }
 
-  const list = el("ul", "live-setlist-list");
-  setlist.items.forEach(function (item) {
-    list.appendChild(renderRow(item));
-  });
-  bodyBox.appendChild(list);
-
+  bodyBox.appendChild(buildLiveSetlistView(setlist, openSheet));
   liveSourceBox.replaceChildren();
-  if (setlist.officialUrl) {
-    const link = el("a", "", "出典");
-    link.href = setlist.officialUrl;
-    link.target = "_blank";
-    link.rel = "noopener";
-    liveSourceBox.appendChild(link);
-    liveSourceBox.appendChild(document.createTextNode("(" + setlist.checkedAt + " 確認)"));
-  } else {
-    liveSourceBox.appendChild(document.createTextNode("出典を確認中です。確認でき次第、ここに載せます。"));
-  }
 }
 
 if (tabsBox && liveTitleBox && bodyBox && liveSourceBox) {

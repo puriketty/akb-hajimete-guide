@@ -102,7 +102,7 @@ function openSheet(song, item) {
       sheetMembers.appendChild(centerLine);
       if (item.detail && item.detail !== item.center) {
         sheetMembers.appendChild(document.createElement("br"));
-        sheetMembers.appendChild(el("span", "sheet-members-detail", "歌唱メンバー: " + item.detail));
+        sheetMembers.appendChild(el("span", "sheet-members-detail", "補足: " + item.detail));
       }
       sheetMembers.hidden = false;
     } else {
