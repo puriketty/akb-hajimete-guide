@@ -1032,6 +1032,11 @@ body.sheet-open { overflow: hidden; }
 .live-row .live-row-button { flex: 1 1 auto; width: auto; min-width: 0; }
 .live-row-src { flex: 0 0 auto; padding: 12px 8px 0 0; font-size: 0.8rem; white-space: nowrap; }
 .src-link { display: inline-block; padding: 4px 3px; }
+.src-fan { color: #245a94; }
+.live-row-fan { overflow-wrap: anywhere; }
+.live-row-fan .ex { margin-right: 4px; }
+button.live-row-button .live-row-fan { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.live-source-list .ex { margin-right: 4px; }
 .live-inline-src { font-size: 0.85rem; }
 .live-order-note, .live-intro { font-size: 0.9rem; color: var(--gray); margin: 8px 0; }
 .live-sub-title { margin: 18px 0 6px; font-size: 1rem; color: var(--pink-deep); }

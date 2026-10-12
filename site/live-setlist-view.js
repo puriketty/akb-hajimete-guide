@@ -39,6 +39,7 @@ function numberSources(setlist) {
     });
   }
   if (setlist.intro) add(setlist.intro.src);
+  add(setlist.orderSrc);
   (setlist.items || []).forEach(function (item) {
     add(item.src);
   });
@@ -57,15 +58,23 @@ function sourceLinks(keys, numbers, className) {
   (keys || []).forEach(function (k) {
     var src = SETLIST_SOURCES[k];
     if (!src) return;
-    var a = liveEl("a", "src-link", "[" + numbers[k] + "]");
+    var a = liveEl("a", "src-link" + (src.fan ? " src-fan" : ""), "[" + numbers[k] + "]");
     a.href = src.url;
     a.target = "_blank";
     a.rel = "noopener";
-    a.title = "出典: " + src.label;
+    a.title = (src.fan ? "出典(ファンの声): " : "出典: ") + src.label;
     a.setAttribute("aria-label", "出典" + numbers[k] + "(新しいタブで開く)");
     box.appendChild(a);
   });
   return box;
+}
+
+// 「ファンの声」(個人ブログなど)だけが根拠の情報の行
+function fanLine(text) {
+  var line = liveEl("span", "live-row-detail live-row-fan");
+  line.appendChild(liveEl("span", "ex fan", "ファンの声"));
+  line.appendChild(document.createTextNode(" " + text));
+  return line;
 }
 
 function buildRow(item, numbers, onSong) {
@@ -79,11 +88,11 @@ function buildRow(item, numbers, onSong) {
     var title = song.title;
     if (item.note) title += "(" + item.note + ")";
     main.appendChild(liveEl("span", "live-row-title", title));
-    var line = item.center || item.detail;
-    if (line) main.appendChild(liveEl("span", "live-row-detail", line));
-    if (!onSong && item.center && item.detail && item.detail !== item.center) {
+    if (item.center) main.appendChild(liveEl("span", "live-row-detail", item.center));
+    if (item.detail && item.detail !== item.center) {
       main.appendChild(liveEl("span", "live-row-detail", item.detail));
     }
+    if (item.fan) main.appendChild(fanLine(item.fan));
     if (onSong) {
       wrap = liveEl("button", "live-row-button");
       wrap.type = "button";
@@ -98,6 +107,8 @@ function buildRow(item, numbers, onSong) {
     if (item.note) name += "(" + item.note + ")";
     main.appendChild(liveEl("span", "live-row-title", name));
     if (item.detail) main.appendChild(liveEl("span", "live-row-detail", item.detail));
+    if (typeof item.fan === "string") main.appendChild(fanLine(item.fan));
+    else if (item.fan === true) main.appendChild(liveEl("span", "ex fan", "ファンの声"));
     wrap = liveEl("div", "live-row-button");
   }
 
@@ -124,7 +135,11 @@ function buildLiveSetlistView(setlist, onSong) {
     intro.appendChild(sourceLinks(setlist.intro.src, nums.numbers, "live-inline-src"));
     root.appendChild(intro);
   }
-  if (setlist.orderNote) root.appendChild(liveEl("p", "live-order-note", setlist.orderNote));
+  if (setlist.orderNote) {
+    var order = liveEl("p", "live-order-note", setlist.orderNote + " ");
+    order.appendChild(sourceLinks(setlist.orderSrc, nums.numbers, "live-inline-src"));
+    root.appendChild(order);
+  }
 
   var list = liveEl("ul", "live-setlist-list");
   (setlist.items || []).forEach(function (item) {
@@ -149,7 +164,8 @@ function buildLiveSetlistView(setlist, onSong) {
   nums.order.forEach(function (k) {
     var src = SETLIST_SOURCES[k];
     var li = liveEl("li");
-    var a = liveEl("a", "", src.label);
+    if (src.fan) li.appendChild(liveEl("span", "ex fan", "ファンの声"));
+    var a = liveEl("a", "", (src.fan ? " " : "") + src.label);
     a.href = src.url;
     a.target = "_blank";
     a.rel = "noopener";
