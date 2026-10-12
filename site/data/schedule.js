@@ -102,14 +102,49 @@ const SCHEDULE = [
     start: "2026-06-20",
     lastDay: "2026-09-13",
     venue: "有明GYM-EX / パシフィコ横浜 / 幕張メッセ / インテックス大阪",
-    summary: "6月20・21日 有明、8月1・2日 パシフィコ横浜、9月5・6日 幕張メッセ、9月13日 インテックス大阪(公式の案内より)。",
+    summary: "6月20・21日 有明、8月1・2日 パシフィコ横浜、9月5・6日 幕張メッセ、9月13日 インテックス大阪(公式の案内より)。成田香姫奈さんの9月6日(幕張メッセ)の第2・3・5・6部の分は、69thの握手会などへ振替があります。",
     guide: { label: "個別握手会ガイド", href: "handshake.html" },
     extra: [
+      { label: "成田香姫奈さんの振替(対象の券を持っている人へ)", href: "handshakes.html#transfer" },
       { label: "部割プランナー(9/5幕張の部割で試せます)", href: "planner.html" },
       { label: "申し込みの流れ(68thの例)", href: "apply.html#kobetsu" }
     ],
     official: [
-      { label: "個別握手会の案内(公式)", url: "https://www.akb48.co.jp/lp/68th-single/os_offline_index.html" }
+      { label: "個別握手会の案内(公式)", url: "https://www.akb48.co.jp/lp/68th-single/os_offline_index.html" },
+      { label: "成田香姫奈分 振替のご案内(公式)", url: "https://www.akb48.co.jp/news/detailpage/487699111" }
+    ]
+  },
+  {
+    id: "online-69th",
+    kind: "handshake",
+    title: "69thシングル Official Shop盤 オンラインお話し会(全6日)",
+    dateLabel: "2026年12月26日(土)〜2027年3月21日(日)",
+    start: "2026-12-26",
+    lastDay: "2027-03-21",
+    venue: "オンライン(WithLIVE Meet&Greet)",
+    summary: "12月26・27日、1月30・31日、3月20・21日。各日10:30〜19:00の全7部制。",
+    guide: { label: "69thのオンラインお話し会", href: "handshakes.html#online-69th" },
+    extra: [{ label: "申し込みの流れ", href: "apply.html#online" }],
+    official: [
+      { label: "オンラインお話し会のご案内(公式)", url: "https://www.akb48.co.jp/news/detailpage/486379499" }
+    ]
+  },
+  {
+    id: "kobetsu-69th",
+    kind: "handshake",
+    title: "69thシングル Official Shop盤 個別握手会(全10日程)",
+    dateLabel: "2027年1月9日(土)〜4月25日(日)",
+    start: "2027-01-09",
+    lastDay: "2027-04-25",
+    venue: "幕張メッセ / 有明GYM-EX / Aichi Sky Expo / 東京ビッグサイト",
+    summary: "1月9・10日 幕張メッセ、1月23・24日 有明GYM-EX、2月6・7日 幕張メッセ、3月7日 Aichi Sky Expo、4月10・11日 東京ビッグサイト、4月25日 Aichi Sky Expo(公式の案内より)。",
+    guide: { label: "69thの個別握手会", href: "handshake.html#next-69th" },
+    extra: [
+      { label: "会場ガイド(有明GYM-EX・Aichi Sky Expo・東京ビッグサイト・幕張メッセ)", href: "venues.html" }
+    ],
+    official: [
+      { label: "個別握手会のご案内(公式)", url: "https://www.akb48.co.jp/news/detailpage/486379500" },
+      { label: "69thシングル発売決定(公式)", url: "https://www.akb48.co.jp/news/detailpage/486379498" }
     ]
   }
 ];
