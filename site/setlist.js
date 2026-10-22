@@ -97,12 +97,16 @@ function openSheet(song, item) {
 
   if (sheetMembers) {
     sheetMembers.replaceChildren();
-    if (item && item.center) {
-      const centerLine = el("strong", "sheet-members-center", item.center);
-      sheetMembers.appendChild(centerLine);
+    if (item && (item.center || item.fan)) {
+      if (item.center) sheetMembers.appendChild(el("strong", "sheet-members-center", item.center));
       if (item.detail && item.detail !== item.center) {
-        sheetMembers.appendChild(document.createElement("br"));
-        sheetMembers.appendChild(el("span", "sheet-members-detail", "歌唱メンバー: " + item.detail));
+        if (item.center) sheetMembers.appendChild(document.createElement("br"));
+        sheetMembers.appendChild(el("span", "sheet-members-detail", "補足: " + item.detail));
+      }
+      if (typeof item.fan === "string") {
+        if (sheetMembers.childNodes.length) sheetMembers.appendChild(document.createElement("br"));
+        sheetMembers.appendChild(el("span", "ex fan", "ファンの声"));
+        sheetMembers.appendChild(el("span", "sheet-members-detail", " " + item.fan));
       }
       sheetMembers.hidden = false;
     } else {

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="analytics.js"></script>
   <title>ライブのセットリスト|THREE CONCEPTS LIVEで聴いた曲をその場で探せる</title>
-  <meta name="description" content="AKB48 THREE CONCEPTS LIVEのセットリストから、聴いた曲をApple Music・Spotify・YouTube Musicで探せます。歌詞は載せていません。公演ごとにタブで切り替えられます。(非公式ファンサイト)">
+  <meta name="description" content="AKB48 THREE CONCEPTS LIVEのセットリストから、聴いた曲をApple Music・Spotify・YouTube Musicで探せます。曲順は報道で確認できたものです。センター・共演メンバーのうち、<span class="ex fan">ファンの声</span>と書いたものは、個人ブログの記録で、公式や報道の発表ではありません。歌詞は載せていません。公演ごとにタブで切り替えられます。(非公式ファンサイト)">
   <link rel="canonical" href="https://akb-hajimete-guide.netlify.app/live-setlist.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="初めてのAKB48ガイド">
@@ -56,7 +56,7 @@
     </nav>
 
     <h1 id="live-setlist-title">ライブのセットリスト</h1>
-    <p>THREE CONCEPTS LIVEで聴いて気になった曲を、その場で探せます。曲名をタップすると、配信サービスで探すボタンが出ます。MC・映像・影アナなどは、流れがわかるように載せていますが、タップはできません。</p>
+    <p>THREE CONCEPTS LIVEで聴いて気になった曲を、その場で探せます。曲名をタップすると、配信サービスで探すボタンが出ます。「本編」「アンコール」などの見出しは、タップできません。曲名のあとの [1] [2] は出典の番号で、押すと出典のページが開きます。</p>
     <div class="notice">
       歌詞は載せていません。曲名をもとに、Apple Music・Spotify・YouTube Musicの<strong>検索ページ</strong>を開くだけです(正確な曲のページとは限りません)。アフィリエイトリンクは使っていません。メンバー名にはリンクを付けていません。
     </div>
@@ -66,10 +66,14 @@
       <div id="live-setlist-tabs" class="filter-chips" aria-label="公演で切り替える"></div>
     </div>
 
-    <div id="live-setlist-body"></div>
+    <p class="notice"><strong>ネタバレ注意：Huluの見逃し配信は10/27 23:59まで</strong></p>
+    <details class="spoiler-box">
+      <summary>セットリストを見る(ネタバレ注意)</summary>
+      <div id="live-setlist-body"></div>
+    </details>
 
     <p id="live-setlist-source" class="summary-scope"></p>
-    <p class="summary-scope">公演の内容は、公式の発表・報告と食い違うことがあります。気づいた点は<a href="contact.html">お問い合わせ</a>から教えてください。</p>
+    <p class="summary-scope">公演の内容は、公式の発表と食い違うことがあります。気づいた点は<a href="contact.html">お問い合わせ</a>から教えてください。</p>
     <p>行った人の感想は、<a href="report.html#voices">みんなの声</a>で読めます。感想を送るときにも、このページのセットリストが参考になります。</p>
 
   </main>
@@ -98,6 +102,7 @@
   <script src="data/songs.js"></script>
   <script src="data/setlists.js"></script>
   <script src="setlist.js"></script>
+  <script src="live-setlist-view.js"></script>
   <script src="live-setlist.js"></script>
 </body>
 </html>
